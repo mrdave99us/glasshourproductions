@@ -1,0 +1,28 @@
+{
+  "name": "glasshourproductions",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 8092 --strictPort",
+    "serve": "vite preview --port 8092 --strictPort",
+    "gate": "python tools/gate.py",
+    "shoot": "node tools/shoot.cjs",
+    "verify": "npm run build && npm run gate"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@types/three": "^0.185.4",
+    "@vitejs/plugin-react": "^6.1.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.2.2"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1"
+  }
+}
