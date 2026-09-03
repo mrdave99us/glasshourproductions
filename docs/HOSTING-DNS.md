@@ -19,7 +19,8 @@ records change.
 ## Status (2026-09-03)
 
 Repo created, Pages enabled (source = GitHub Actions), custom domain saved in Settings > Pages.
-The GoDaddy records below are NOT changed yet; the domain still parks until they are.
+David switched the GoDaddy records on 2026-09-03 (evening). GitHub reports the site live over
+HTTP; the certificate for HTTPS is issued by GitHub within the hour, then Enforce HTTPS is ticked.
 
 ## Records
 
