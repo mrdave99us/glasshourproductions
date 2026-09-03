@@ -11,8 +11,8 @@
 - Deployed: repo github.com/mrdave99us/glasshourproductions, Pages source = GitHub Actions,
   custom domain glasshourproductions.com saved (DNS check pending the GoDaddy records).
 
-- DNS switched by David 2026-09-03; live at http://glasshourproductions.com/ (every asset 200 from
-  GitHub's origin). Enforce HTTPS follows the certificate.
+- DNS switched by David 2026-09-03; LIVE at https://glasshourproductions.com/ with Enforce HTTPS on
+  (every page and asset 200, certificate valid, www redirects to the apex).
 
 ## Needs Paul
 

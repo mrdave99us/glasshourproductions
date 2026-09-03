@@ -19,8 +19,9 @@ records change.
 ## Status (2026-09-03)
 
 Repo created, Pages enabled (source = GitHub Actions), custom domain saved in Settings > Pages.
-David switched the GoDaddy records on 2026-09-03 (evening). GitHub reports the site live over
-HTTP; the certificate for HTTPS is issued by GitHub within the hour, then Enforce HTTPS is ticked.
+David switched the GoDaddy records on 2026-09-03 (evening). GitHub passed its DNS check and issued
+the certificate about 20 minutes later; Enforce HTTPS is on. Live: https://glasshourproductions.com/
+(www redirects to the apex). Verified from outside: every page and asset 200 with a valid certificate.
 
 ## Records
 
