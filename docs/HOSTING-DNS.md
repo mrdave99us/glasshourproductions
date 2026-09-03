@@ -16,6 +16,11 @@ transferred to Paul's own GitHub later without touching DNS.
 The domain's nameservers stay at GoDaddy (ns57/ns58.domaincontrol.com). Only the
 records change.
 
+## Status (2026-09-03)
+
+Repo created, Pages enabled (source = GitHub Actions), custom domain saved in Settings > Pages.
+The GoDaddy records below are NOT changed yet; the domain still parks until they are.
+
 ## Records
 
 Before (parked):

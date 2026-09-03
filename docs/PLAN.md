@@ -8,6 +8,14 @@
 - Staging skeleton: React shell (header, hero, Work/About/Contact frames, footer) with the
   glass hourglass WebGL hero. noindex + robots Disallow.
 - Gate + headless sweep tooling. GitHub Pages workflow. Share card.
+- Deployed: repo github.com/mrdave99us/glasshourproductions, Pages source = GitHub Actions,
+  custom domain glasshourproductions.com saved (DNS check pending the GoDaddy records).
+
+## Waiting on David
+
+- GoDaddy DNS for glasshourproductions.com: replace `A @ Parked` with the four GitHub A records
+  and point `CNAME www` at mrdave99us.github.io (exact table in HOSTING-DNS.md). Then in the repo
+  Settings > Pages tick Enforce HTTPS once the certificate is issued.
 
 ## Needs Paul
 
