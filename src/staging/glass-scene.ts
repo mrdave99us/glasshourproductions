@@ -30,7 +30,7 @@ function profile(y: number): number {
 
 function start(stage: HTMLElement, canvas: HTMLCanvasElement, gl: WebGL2RenderingContext, reduced: boolean): () => void {
   const renderer = new THREE.WebGLRenderer({ canvas, context: gl, antialias: true })
-  renderer.setClearColor(0x0b0d14, 1)
+  renderer.setClearColor(0x07080a, 1)
   renderer.toneMapping = THREE.ACESFilmicToneMapping
   renderer.toneMappingExposure = 1.05
   renderer.outputColorSpace = THREE.SRGBColorSpace
@@ -38,7 +38,7 @@ function start(stage: HTMLElement, canvas: HTMLCanvasElement, gl: WebGL2Renderin
   const scene = new THREE.Scene()
   const pmrem = new THREE.PMREMGenerator(renderer)
   scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture
-  scene.environmentIntensity = 0.55
+  scene.environmentIntensity = 0.7
 
   const camera = new THREE.PerspectiveCamera(32, 1, 0.1, 40)
   camera.position.set(0, 0.15, 7.2)
@@ -59,7 +59,7 @@ function start(stage: HTMLElement, canvas: HTMLCanvasElement, gl: WebGL2Renderin
   glassG.add(glass)
 
   // brass frame: two plates, three pillars, a finial on each plate
-  const brass = new THREE.MeshStandardMaterial({ color: 0xc9a25c, metalness: 0.95, roughness: 0.32, envMapIntensity: 1.4 })
+  const brass = new THREE.MeshStandardMaterial({ color: 0xd9dee5, metalness: 1, roughness: 0.16, envMapIntensity: 1.8 })
   const plateGeo = new THREE.CylinderGeometry(0.98, 0.98, 0.09, 96)
   for (const y of [1.46, -1.46]) { const p = new THREE.Mesh(plateGeo, brass); p.position.y = y; glassG.add(p) }
   const pillarGeo = new THREE.CylinderGeometry(0.035, 0.035, 2.92, 24)
@@ -73,7 +73,7 @@ function start(stage: HTMLElement, canvas: HTMLCanvasElement, gl: WebGL2Renderin
   // sand: a falling stream, a pile below, a reserve above. Opaque materials with
   // additive blending, so the transmission pass sees them through the glass.
   const sandMat = (size: number) => new THREE.PointsMaterial({
-    color: 0xe7b45a, size, sizeAttenuation: true, transparent: false,
+    color: 0xdfe9f5, size, sizeAttenuation: true, transparent: false,
     blending: THREE.AdditiveBlending, depthWrite: false,
   })
   const stream = new Float32Array(STREAM_N * 3)
@@ -126,7 +126,7 @@ function start(stage: HTMLElement, canvas: HTMLCanvasElement, gl: WebGL2Renderin
   }
 
   // light: the sand glows, so a warm point light lives at the neck; a cool key from above
-  const neck = new THREE.PointLight(0xe7b45a, 6, 5, 2); neck.position.set(0, -0.2, 0.2); glassG.add(neck)
+  const neck = new THREE.PointLight(0xbfd6f0, 5, 5, 2); neck.position.set(0, -0.2, 0.2); glassG.add(neck)
   const key = new THREE.DirectionalLight(0xdce6f2, 1.6); key.position.set(-2, 4, 3); scene.add(key)
   const rim = new THREE.DirectionalLight(0x8a97ad, 0.9); rim.position.set(3, -1, -3); scene.add(rim)
 
