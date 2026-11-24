@@ -33,7 +33,9 @@ W, H = 800, 500
 PW, PH = 3072, 1536  # look-around copies: smaller than the file that is sold, and marked
 # Only the templates cleared to show.
 TEMPLATES = ["orbit", "flightdeck", "confetti"]
-SCENE_BATCHES = ["003", "004", "006", "007", "008", "009", "010", "011", "012", "013"]
+# 360 scenes are off Glass Hour (David, Nov 24 2026: "lose 360 scenes"), so none are candidates. The batches that
+# held them are kept here, empty, so the change is one line to undo.
+SCENE_BATCHES = []  # was 003, 004, 006-013
 GRAPHIC_BATCHES = ["002", "005", "006", "007", "008", "010", "012"]
 # Web graphics: first rule that matches wins; anything matching none is left out.
 PAINTING = re.compile(r"painting", re.I)
@@ -135,7 +137,7 @@ def pick_page(cands):
     thumbs = PICK_PAGE / "t"
     thumbs.mkdir(parents=True, exist_ok=True)
     picked = set(json.load(open(PICKS, encoding="utf-8"))["items"])
-    sections = [("Website templates", [c for c in cands if c["kind"] == "template"]), ("360 scenes", [c for c in cands if c["kind"] == "scene"])]
+    sections = [("Website templates", [c for c in cands if c["kind"] == "template"])]
     sections += [(f"Web graphics: {GROUP_NAME[g]}", [c for c in cands if c.get("group") == g]) for g in GROUP_NAME]
     for c in cands:
         dest = thumbs / f"{c['id']}.jpg"

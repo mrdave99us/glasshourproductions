@@ -4,11 +4,11 @@ import './site.css'
 import list from './items.json'
 
 export const items = list
-export const KIND = { template: 'Website template', scene: '360 scene', graphic: 'Web graphic' }
+export const KIND = { template: 'Website template', graphic: 'Web graphic' }
 // Graphics are assets for building websites, sorted by what they are used for. The order is the order shown.
 export const GROUP = { background: 'Backgrounds', texture: 'Textures and patterns', backdrop: 'Product backdrops', icon: 'Icons and illustrations', seasonal: 'Seasonal banners' }
 export const GROUP_NOTE = { background: 'For heroes and sections.', texture: 'Surfaces that tile behind content.', backdrop: 'Empty stages for product pages.', icon: 'Spot pictures for features and callouts.', seasonal: 'Holiday headers with room for words.' }
-export const SHORT = { template: 'Template', scene: '360', graphic: 'Graphic' }
+export const SHORT = { template: 'Template', graphic: 'Graphic' }
 export const img = id => `/v2/img/${id}.jpg`
 export const byId = id => items.find(i => i.id === id)
 

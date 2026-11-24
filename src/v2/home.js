@@ -23,7 +23,7 @@ for (const card of document.querySelectorAll('.kindcard')) {
 if (items.length) {
   document.getElementById('strip').innerHTML = items.slice(0, 10).map(it => itemCard(it)).join('')
   for (const el of document.querySelectorAll('[data-fresh]')) el.hidden = false
-  document.getElementById('lead').textContent = 'Website templates, 360 scenes and web graphics from a working studio. Buy one, subscribe for all of it, or hire us to build yours.'
+  document.getElementById('lead').textContent = 'Website templates and web graphics from a working studio. Buy one, subscribe for all of it, or hire us to build yours.'
   document.getElementById('leadbtns').innerHTML = '<a class="btn" href="/staging-v2/catalog/">Browse the catalog</a><a class="btn ghost" href="#order">Hire the studio</a>'
   document.getElementById('lastbtns').innerHTML = '<a class="btn" href="/staging-v2/catalog/">Browse the catalog</a><a class="btn ghost" href="#contact">Start a project</a>'
 }
