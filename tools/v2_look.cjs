@@ -48,14 +48,19 @@ const SIZES = [['desktop', 1440, 900, 1, false], ['ultrawide', 3440, 1300, 1, fa
     await js(`new Promise(async r => { for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.8) { scrollTo({ top: y, behavior: 'instant' }); await new Promise(q => setTimeout(q, 120)) } scrollTo({ top: 0, behavior: 'instant' }); setTimeout(r, 600) })`)
     await shot('home', true)
     const home = await facts()
-    // The inquiry form: an empty one is refused in plain words; a filled one is written out as an email addressed to
-    // us (this build has no inbox address, so the email way is the one in use).
+    // The inquiry form: an empty one is refused in plain words. A filled one is only sent in this test when the form
+    // works by email (then it is written out and not sent); with a real inbox behind it, sending would put a test
+    // inquiry in the back office on every run, so the test stops at what the form says it will do.
     await js(`document.getElementById('ask').requestSubmit()`)
     const refused = await js(`document.getElementById('ask-err').hidden ? 'NOT REFUSED' : document.getElementById('ask-err').textContent`)
-    await js(`(() => { const f = document.getElementById('ask'), el = f.elements; el.name.value = 'Test Person'; el.email.value = 'test@example.com'; el.org.value = 'The Alder Room'; el.when.value = 'By March'; el.about.value = 'A new site for our venue.'; f.addEventListener('click', e => { if (e.target.id === 'ask-link') e.preventDefault() }, true); f.requestSubmit() })()`)
-    await sleep(300)
-    const mail = decodeURIComponent(await js(`(document.getElementById('ask-link') || {}).href || 'NO LINK'`))
-    const inquiry = { empty_form: refused, to: mail.split('?')[0], has_all: ['Test Person', 'test@example.com', 'The Alder Room', 'By March', 'A website', 'A new site for our venue.'].every(x => mail.includes(x)) }
+    const way = await js(`document.getElementById('ask-note').textContent`)
+    const inquiry = { empty_form: refused, way: way.startsWith('This goes straight to us') ? 'straight to the inbox' : 'by email' }
+    if (inquiry.way === 'by email') {
+      await js(`(() => { const f = document.getElementById('ask'), el = f.elements; el.name.value = 'Test Person'; el.email.value = 'test@example.com'; el.about.value = 'A new site for our venue.'; f.addEventListener('click', e => { if (e.target.id === 'ask-link') e.preventDefault() }, true); f.requestSubmit() })()`)
+      await sleep(300)
+      const mail = decodeURIComponent(await js(`(document.getElementById('ask-link') || {}).href || 'NO LINK'`))
+      inquiry.to = mail.split('?')[0]; inquiry.has_all = ['Test Person', 'test@example.com', 'A new site for our venue.'].every(x => mail.includes(x))
+    }
     await js(`document.getElementById('tab-custom').click(); document.getElementById('shelf').scrollIntoView(); new Promise(r => setTimeout(r, 400))`)
     await shot('tabs')
     const tab = await js(`[document.getElementById('p-catalog').hidden, document.getElementById('p-custom').hidden, document.getElementById('p-sub').hidden].join(',')`)
