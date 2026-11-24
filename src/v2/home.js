@@ -25,12 +25,20 @@ if (items.length) {
   for (const el of document.querySelectorAll('[data-fresh]')) el.hidden = false
   document.getElementById('lead').textContent = 'Website templates, 360 scenes and web graphics from a working studio. Buy one, subscribe for all of it, or hire us to build yours.'
   document.getElementById('leadbtns').innerHTML = '<a class="btn" href="/staging-v2/catalog/">Browse the catalog</a><a class="btn ghost" href="#order">Hire the studio</a>'
+  document.getElementById('lastbtns').innerHTML = '<a class="btn" href="/staging-v2/catalog/">Browse the catalog</a><a class="btn ghost" href="#contact">Start a project</a>'
 }
+
+// Links that lead to the form can say what the visitor is asking about; the form's "What you need" follows.
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[data-need][href="#contact"]')
+  if (a) document.querySelector('#ask select[name="need"]').value = a.dataset.need
+})
 
 storeBar()
 if (storeOn) prices().then(p => {
-  const low = Math.min(...Object.values(p.items).filter(i => i.available).map(i => i.cents))
-  document.getElementById('buy-note').textContent = `Single pieces from ${usd(low)}. The subscription is ${usd(p.subscription_cents)} a month and can be cancelled any time.`
+  const on = Object.values(p.items).filter(i => i.available).map(i => i.cents)
+  const sub = `The subscription is ${usd(p.subscription_cents)} a month and can be cancelled any time.`
+  document.getElementById('buy-note').textContent = on.length ? `Single pieces from ${usd(Math.min(...on))}. ${sub}` : sub
   for (const a of document.querySelectorAll('[data-sub]')) { a.href = '/staging-v2/cart/?plan=subscription'; a.textContent = `Subscribe, ${usd(p.subscription_cents)} a month` }
 }).catch(() => { })
 
@@ -77,7 +85,9 @@ ask.addEventListener('submit', async e => {
   try {
     const r = await fetch(`${INBOX}/inquiry`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(v) })
     const d = await r.json().catch(() => ({}))
-    if (r.status === 400 || r.status === 429) { err.textContent = d.error || 'That did not go through.'; err.hidden = false; return }
+    if (r.status === 400) { err.textContent = d.error || 'That did not go through.'; err.hidden = false; return }
+    // Busy (too many inquiries this hour): the visitor is never turned away; it goes by their own email instead.
+    if (r.status === 429) throw new Error('busy')
     if (!r.ok) throw new Error('inbox')
     ask.innerHTML = `<div class="thanks" role="status"><h3>Got it. Thank you, ${v.name.split(' ')[0].replace(/[<>&"]/g, '')}.</h3><p>Your inquiry is with us. We will write back to ${v.email.replace(/[<>&"]/g, '')}.</p></div>`
   } catch (x) {

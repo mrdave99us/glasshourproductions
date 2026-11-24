@@ -36,7 +36,7 @@ const SIZES = [['desktop', 1440, 900, 1, false], ['ultrawide', 3440, 1300, 1, fa
     const js = async expression => (await s('Runtime.evaluate', { expression, awaitPromise: true, returnByValue: true })).result.value
     const shot = async (stop, whole) => {
       let clip
-      if (whole) { const m = await s('Page.getLayoutMetrics'); clip = { x: 0, y: 0, width: w, height: Math.min(m.cssContentSize.height, 12000), scale: 1 } }
+      if (whole) { const m = await s('Page.getLayoutMetrics'); clip = { x: 0, y: 0, width: w, height: m.cssContentSize.height, scale: Math.min(1, 16000 / (m.cssContentSize.height * scale)) } }
       const r = await s('Page.captureScreenshot', { format: 'jpeg', quality: 86, captureBeyondViewport: !!whole, ...(clip ? { clip } : {}) })
       fs.writeFileSync(path.join(OUT, `${name}-${stop}.jpg`), Buffer.from(r.data, 'base64'))
     }

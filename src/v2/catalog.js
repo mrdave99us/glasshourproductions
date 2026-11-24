@@ -11,7 +11,8 @@ const priceTag = it => (shop?.items[it.id]?.available ? usd(shop.items[it.id].ce
 const grid = document.getElementById('grid'), chips = document.getElementById('chips'), count = document.getElementById('count')
 const q = document.getElementById('q'), view = document.getElementById('view'), groups = document.getElementById('groups')
 const params = new URLSearchParams(location.search)
-const state = { c: KIND[params.get('c')] ? params.get('c') : '', g: GROUP[params.get('g')] ? params.get('g') : '', q: params.get('q') || '' }
+const own = (table, k) => (k && Object.hasOwn(table, k) ? k : '')
+const state = { c: own(KIND, params.get('c')), g: own(GROUP, params.get('g')), q: params.get('q') || '', i: '' }
 if (state.g) state.c = 'graphic'
 q.value = state.q
 
@@ -30,7 +31,7 @@ function draw() {
   if (!items.length) {
     chips.hidden = groups.hidden = true
     count.textContent = 'Nothing is on the shelf yet. We are hand-picking what goes up.'
-    grid.innerHTML = `<p class="none"><a class="btn" href="/staging-v2/#work">See the sites we built</a> <a class="btn ghost" href="/staging-v2/#order">Start a project</a></p>`
+    grid.innerHTML = `<p class="none"><a class="btn" href="/staging-v2/#work">See the sites we built</a> <a class="btn ghost" href="/staging-v2/#contact">Start a project</a></p>`
     return
   }
   const list = found()
@@ -48,8 +49,13 @@ function draw() {
     : `<p class="none">Nothing on the shelf matches that yet. <a href="mailto:glasshourproductions@gmail.com?subject=${encodeURIComponent('Looking for: ' + state.q)}">Tell us what you are after</a> and we will make it.</p>`
   const what = state.g ? GROUP[state.g].toLowerCase() : state.c === 'graphic' ? 'web graphics' : state.c ? CHIPS.find(c => c[0] === state.c)[1].toLowerCase() : 'pieces'
   count.textContent = state.q ? `${list.length} of ${items.length} match "${state.q}".` : `${list.length} ${what} on the shelf so far. More are on the way.`
-  const p = new URLSearchParams(); if (state.c) p.set('c', state.c); if (state.g) p.set('g', state.g); if (state.q) p.set('q', state.q)
-  history.replaceState(null, '', p.size ? `?${p}` : location.pathname)
+  address()
+}
+// The address carries what is on screen (?c= ?g= ?q= ?i=), so it can be copied and sent.
+function address() {
+  const p = new URLSearchParams(); for (const k of ['c', 'g', 'q', 'i']) if (state[k]) p.set(k, state[k])
+  const s = p.toString()
+  history.replaceState(null, '', s ? `?${s}` : location.pathname)
 }
 
 chips.addEventListener('click', e => { const b = e.target.closest('button'); if (b) { state.c = b.dataset.c; state.g = ''; draw() } })
@@ -62,6 +68,7 @@ document.getElementById('search').addEventListener('submit', e => { e.preventDef
 // A 360 scene opens as a view you can turn; everything else as its picture.
 let pano = null
 function show(it) {
+  if (pano) { pano.destroy(); pano = null }
   const ask = `mailto:glasshourproductions@gmail.com?subject=${encodeURIComponent(`${KIND[it.kind]}: ${it.title}`)}`
   view.innerHTML = `<div class="view${it.pano ? ' scene' : ''}"><div class="pic"><img src="${img(it.id)}" alt="${esc(it.title)}" width="800" height="500"></div>
     <div class="txt"><small>${KIND[it.kind]}${it.group ? `, ${GROUP[it.group].toLowerCase()}` : ''}${it.pages ? `, ${it.pages} pages` : ''}</small><h2 id="view-title">${esc(it.title)}</h2>
@@ -70,7 +77,8 @@ function show(it) {
     ${it.ai ? '<p>Made with image generation and finished in our studio.</p>' : '<p>Designed and built by hand.</p>'}
     ${actions(it, ask)}</div>
     <form method="dialog"><button class="x" aria-label="Close">&#10005;</button></form></div>`
-  view.showModal()
+  if (!view.open) view.showModal()
+  state.i = it.id; address()
   if (it.pano) scene(it)
 }
 // What can be done with a piece. Store off: ask for it. Store on: add it to the cart, or download it if the
@@ -89,8 +97,7 @@ view.addEventListener('click', e => {
   const b = e.target.closest('[data-cart]'); if (!b) return
   const id = b.dataset.cart
   if (cart.has(id)) cart.remove(id); else cart.add(id)
-  const flatWas = flat; if (pano) { pano.destroy(); pano = null }
-  view.close(); flat = flatWas; show(byId(id))
+  show(byId(id))
 })
 
 // A 360 scene has two ways to be seen: standing inside it, or flat, the whole turn unrolled as the file itself is.
@@ -111,7 +118,7 @@ function scene(it) {
   pic.querySelector('.modes').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { flat = b.dataset.flat === '1'; set() } })
   set()
 }
-view.addEventListener('close', () => { if (pano) { pano.destroy(); pano = null } })
+view.addEventListener('close', () => { if (pano) { pano.destroy(); pano = null } state.i = ''; address() })
 grid.addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) show(byId(b.dataset.id)) })
 view.addEventListener('click', e => { if (e.target === view) view.close() })
 
@@ -119,4 +126,4 @@ storeBar()
 draw()
 const first = byId(params.get('i')); if (first) show(first)
 // Prices arrive a moment after the page: draw once without them, then again with.
-if (storeOn) Promise.all([prices(), me()]).then(([p, m]) => { shop = p; who = m; draw(); if (view.open && first) { view.close(); show(first) } }).catch(() => { })
+if (storeOn) Promise.all([prices(), me()]).then(([p, m]) => { shop = p; who = m; draw(); if (view.open && state.i) show(byId(state.i)) }).catch(() => { })

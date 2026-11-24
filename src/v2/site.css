@@ -166,7 +166,7 @@ h2 em, h1 em { font-style: normal; color: var(--sand); }
 .ask .two { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
 .ask label { display: flex; flex-direction: column; gap: .4em; font-size: .86em; font-weight: 600; }
 .ask label span { font-weight: 400; color: var(--soft); display: contents; }
-.ask input, .ask select, .ask textarea { padding: .8em .9em; border-radius: .55em; border: 1px solid #3a3d44; background: var(--bg); color: var(--ink); font: 400 1.16em/1.4 inherit; font-family: inherit; resize: vertical; }
+.ask input, .ask select, .ask textarea { padding: .8em .9em; border-radius: .55em; border: 1px solid #3a3d44; background: var(--bg); color: var(--ink); font: 400 1.16em/1.4 "Geist Variable", system-ui, sans-serif; resize: vertical; }
 .ask input:focus, .ask select:focus, .ask textarea:focus { outline: 2px solid var(--sand); outline-offset: 1px; }
 .ask ::placeholder { color: #7d7a73; }
 .ask .send { display: flex; align-items: center; gap: 1.4em; }
@@ -189,6 +189,8 @@ h2 em, h1 em { font-style: normal; color: var(--sand); }
 .last h2 { font-size: clamp(36px, min(5.4vw, 9.6vh), 140px); }
 .last p { margin: 1.1em 0 1.8em; color: var(--soft); font-size: 1.1em; }
 .last .btns { justify-content: center; }
+/* A short page (an empty shelf, a cart) still puts its footer at the bottom of the screen, not halfway up. */
+main#main { min-height: calc(100svh - 15em); }
 .foot { border-top: 1px solid var(--line); padding: 2.6em 0 3.2em; font-size: .86em; color: var(--soft); }
 .foot .wrap { display: flex; justify-content: space-between; align-items: flex-start; gap: 2em; flex-wrap: wrap; }
 .foot nav { display: flex; gap: 1.8em; flex-wrap: wrap; }
