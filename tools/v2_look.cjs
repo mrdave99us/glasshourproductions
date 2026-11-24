@@ -45,7 +45,7 @@ const SIZES = [['desktop', 1440, 900, 1, false], ['ultrawide', 3440, 1300, 1, fa
     await s('Emulation.setDeviceMetricsOverride', { width: w, height: h, deviceScaleFactor: scale, mobile })
     await s('Page.navigate', { url: BASE }); await sleep(2500)
     // Walk the page so lazy pictures load, then take it whole.
-    await js(`new Promise(async r => { for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.8) { scrollTo(0, y); await new Promise(q => setTimeout(q, 120)) } scrollTo(0, 0); setTimeout(r, 500) })`)
+    await js(`new Promise(async r => { for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.8) { scrollTo({ top: y, behavior: 'instant' }); await new Promise(q => setTimeout(q, 120)) } scrollTo({ top: 0, behavior: 'instant' }); setTimeout(r, 600) })`)
     await shot('home', true)
     const home = await facts()
     await js(`document.getElementById('tab-custom').click(); document.getElementById('shelf').scrollIntoView(); new Promise(r => setTimeout(r, 400))`)

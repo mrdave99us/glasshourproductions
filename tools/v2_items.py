@@ -30,8 +30,35 @@ DEMO.mkdir(parents=True, exist_ok=True)
 # Only the templates cleared to show.
 TEMPLATES = ["orbit", "flightdeck", "confetti"]
 # Always on the shelf: the pieces the home page shows by name.
-MUST = {"006_031", "006_036", "013_001", "013_005", "013_009", "013_013", "006_021", "006_026", "009_022", "011_016", "011_026", "013_021", "011_021", "011_031"}
-BATCHES = {"006": 4, "007": 5, "009": 5, "010": 5, "011": 4, "012": 5, "013": 2}  # batch: take every nth
+MUST = {"006_036", "006_021", "006_026", "009_022", "011_016", "011_026", "013_021", "011_021", "011_031"}
+BATCHES = {"006": 4, "007": 5, "009": 5, "010": 5, "011": 4, "012": 5, "013": 2}  # 360 scenes: take every nth of a batch
+# Graphics are assets for building websites, and nothing else. Every piece that fits one of
+# these categories is taken, from these batches. First rule that matches wins; anything matching none is left out.
+GRAPHIC_BATCHES = ["002", "005", "006", "007", "008", "010", "012"]
+PAINTING = re.compile(r"painting", re.I)
+SURFACE = re.compile(r"texture|terrazzo|planks|concrete|pattern|in rows", re.I)
+NOT_WEB = re.compile(r"top view|flat lay|piggy bank|moving boxes|interface", re.I)
+GROUPS = [
+    ("backdrop", re.compile(r"podium|display stand|product display|kitchen counter|bathroom shelf|oak desk", re.I)),
+    ("icon", re.compile(r"\bicon\b|neon .* graphic", re.I)),
+    ("seasonal", re.compile(r"copy space|frame on|border on|celebration|confetti|ramadan|halloween", re.I)),
+    ("background", re.compile(r"technology|optical illusion|abstract background|gradient|paper cut|bokeh|watercolor|botanical", re.I)),
+    ("texture", re.compile(r"texture|terrazzo|planks|concrete|pattern|in rows", re.I)),
+]
+
+
+def group_of(title):
+    if PAINTING.search(title):
+        return None
+    for name, rule in GROUPS[:2]:  # a backdrop or an icon is one whatever else its title says
+        if rule.search(title):
+            return name
+    if NOT_WEB.search(title):
+        return "texture" if SURFACE.search(title) and "technology" not in title.lower() else None
+    for name, rule in GROUPS[2:]:
+        if rule.search(title):
+            return name
+    return None
 
 
 def fit(im, pano=False):
@@ -106,25 +133,55 @@ for batch, step in BATCHES.items():
         if not src.exists():
             continue
         im = Image.open(src)
-        ratio = im.width / im.height
-        pano = 1.9 < ratio < 2.1
-        kind = "scene" if pano else "graphic" if re.search(r"neon|icon|logo|pattern|background|podium|display", row["Title"], re.I) else "art"
+        if not 1.9 < im.width / im.height < 2.1:
+            continue
         iid = "s-" + Path(row["Filename"]).stem.replace("stockpilot", "")
-        fit(im, pano).save(IMG / f"{iid}.jpg", quality=80, optimize=True)
-        if pano:
-            pano_copy(im, PANO / f"{iid}.jpg")
+        fit(im, True).save(IMG / f"{iid}.jpg", quality=80, optimize=True)
+        pano_copy(im, PANO / f"{iid}.jpg")
         words = ", ".join(k.strip() for k in row["Keywords"].split(",")[:9])
-        items.append({"id": iid, "kind": kind, "title": tidy(row["Title"]), "note": "", "ai": True, "pano": pano, "words": words})
+        items.append({"id": iid, "kind": "scene", "title": tidy(row["Title"]), "note": "", "ai": True, "pano": True, "words": words})
+
+# Web graphics: paintings, wallpapers and photographs are sold on Adobe Stock, not here.
+titles = {}
+for batch in GRAPHIC_BATCHES:
+    folder = STOCK / f"pilot_batch_{batch}"
+    seen = set()
+    for f in sorted(glob.glob(str(folder / "*_20*_batch*.csv"))):
+        for row in csv.DictReader(open(f, encoding="utf-8-sig", errors="replace")):
+            src = folder / row["Filename"]
+            iid = "s-" + Path(row["Filename"]).stem.replace("stockpilot", "")
+            group = group_of(row["Title"])
+            if not group or iid in seen or not src.exists() or not re.fullmatch(r"s-\d{3}_\d{3}", iid):
+                continue
+            im = Image.open(src)
+            if 1.9 < im.width / im.height < 2.1:
+                continue
+            seen.add(iid)
+            fit(im).save(IMG / f"{iid}.jpg", quality=80, optimize=True)
+            title = tidy(row["Title"])
+            titles[title] = titles.get(title, 0) + 1
+            if titles[title] > 1:  # several pieces share one stock title: number them so they can be told apart
+                title = f"{title}, no. {titles[title]}"
+            words = ", ".join(k.strip() for k in row["Keywords"].split(",")[:9])
+            items.append({"id": iid, "kind": "graphic", "group": group, "title": title, "note": "", "ai": True, "pano": False, "words": words})
 
 if MOTION.exists():
     m = Image.open(MOTION)
     fit(m.crop((int(m.width * 0.75), 0, m.width, m.height))).save(IMG / "m-stage.jpg", quality=82, optimize=True)
 
+# Pictures of pieces that are no longer on the shelf go.
+keep = {i["id"] for i in items} | {"m-stage"}
+for folder in (IMG, PANO):
+    for f in folder.glob("*.jpg"):
+        if f.stem not in keep:
+            f.unlink()
+
 (ROOT / "src" / "v2").mkdir(parents=True, exist_ok=True)
 json.dump(items, open(ROOT / "src" / "v2" / "items.json", "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 kinds = {}
 for i in items:
-    kinds[i["kind"]] = kinds.get(i["kind"], 0) + 1
+    k = i["kind"] + ("/" + i["group"] if i.get("group") else "")
+    kinds[k] = kinds.get(k, 0) + 1
 size = sum(f.stat().st_size for f in IMG.glob("*.jpg")) // 1024
 psize = sum(f.stat().st_size for f in PANO.glob("*.jpg")) // 1024
 print(f"{len(list(PANO.glob('*.jpg')))} look-around copies, {psize} KB in {PANO}")

@@ -1,19 +1,21 @@
 // Shared by both pages of staging v2: the faces, the styles, and how one item on the shelf is drawn.
-import '@fontsource-variable/bricolage-grotesque/opsz.css'
-import '@fontsource/instrument-serif/400-italic.css'
+import '@fontsource-variable/geist/wght.css'
 import './site.css'
 import list from './items.json'
 
 export const items = list
-export const KIND = { template: 'Website template', scene: '360 scene', art: 'Art', graphic: 'Graphic' }
-export const SHORT = { template: 'Template', scene: '360', art: 'Art', graphic: 'Graphic' }
+export const KIND = { template: 'Website template', scene: '360 scene', graphic: 'Web graphic' }
+// Graphics are assets for building websites, sorted by what they are used for. The order is the order shown.
+export const GROUP = { background: 'Backgrounds', texture: 'Textures and patterns', backdrop: 'Product backdrops', icon: 'Icons and illustrations', seasonal: 'Seasonal banners' }
+export const GROUP_NOTE = { background: 'For heroes and sections.', texture: 'Surfaces that tile behind content.', backdrop: 'Empty stages for product pages.', icon: 'Spot pictures for features and callouts.', seasonal: 'Holiday headers with room for words.' }
+export const SHORT = { template: 'Template', scene: '360', graphic: 'Graphic' }
 export const img = id => `/v2/img/${id}.jpg`
 export const byId = id => items.find(i => i.id === id)
 
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
 
 /** One item as a card: a link on the home page, a button on the catalog page. */
-export function itemCard(it, tag = 'a') {
+export function itemCard(it, tag = 'a', price = '') {
   const open = tag === 'a' ? `<a class="card item" href="/staging-v2/catalog/?i=${it.id}">` : `<button class="card item" type="button" data-id="${it.id}">`
-  return `${open}<div class="pic"><img src="${img(it.id)}" alt="" loading="lazy" width="800" height="500"><span class="badge">${SHORT[it.kind]}</span>${it.ai ? '<span class="badge ai">AI</span>' : ''}</div><h3>${esc(it.title)}</h3><small>${KIND[it.kind]}${it.pages ? `, ${it.pages} pages` : ''}</small></${tag}>`
+  return `${open}<div class="pic"><img src="${img(it.id)}" alt="" loading="lazy" width="800" height="500"><span class="badge">${SHORT[it.kind]}</span>${it.ai ? '<span class="badge ai">AI</span>' : ''}</div><h3>${esc(it.title)}</h3><small>${it.group ? GROUP[it.group] : KIND[it.kind]}${it.pages ? `, ${it.pages} pages` : ''}${price ? `<b class="price">${price}</b>` : ''}</small></${tag}>`
 }
