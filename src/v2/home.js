@@ -31,7 +31,8 @@ if (items.length) {
 // Links that lead to the form can say what the visitor is asking about; the form's "What you need" follows.
 document.addEventListener('click', e => {
   const a = e.target.closest('a[data-need][href="#contact"]')
-  if (a) document.querySelector('#ask select[name="need"]').value = a.dataset.need
+  const need = a && document.querySelector('#ask select[name="need"]')   // gone once the form has been sent
+  if (need && [...need.options].some(o => o.value === a.dataset.need)) need.value = a.dataset.need
 })
 
 storeBar()

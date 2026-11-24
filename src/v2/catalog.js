@@ -92,6 +92,7 @@ view.addEventListener('click', e => {
   const id = b.dataset.cart
   if (cart.has(id)) cart.remove(id); else cart.add(id)
   show(byId(id))
+  view.querySelector(`[data-cart="${id}"]`)?.focus()   // the redraw replaced the button; keep the keyboard on it
 })
 
 view.addEventListener('close', () => { state.i = ''; address() })
