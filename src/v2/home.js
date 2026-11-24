@@ -51,3 +51,38 @@ tabs.forEach((t, i) => {
     else if (e.key === 'ArrowLeft') pick(tabs[(i + tabs.length - 1) % tabs.length], true)
   })
 })
+
+// The inquiry form. Where the site is built with an inbox address (VITE_INBOX), the inquiry is sent there and lands
+// in our back office. Where it is not, or if sending fails, the form writes the inquiry out as an email in the
+// visitor's own mail program instead, so an inquiry is never lost. The note under the button says which it is.
+const INBOX = (import.meta.env.VITE_INBOX || '').replace(/\/$/, '')
+const ask = document.getElementById('ask'), askNote = document.getElementById('ask-note')
+const byMail = 'This opens your own email with the inquiry written out, ready to send to glasshourproductions@gmail.com. Nothing is sent until you press send there.'
+askNote.textContent = INBOX ? 'This goes straight to us. We write back to the email you give.' : byMail
+function mailIt(v) {
+  const body = [`Name: ${v.name}`, `Email: ${v.email}`, v.org && `Company, band or venue: ${v.org}`, `What I need: ${v.need}`, v.when && `When: ${v.when}`, '', v.about].filter(l => l !== false && l !== '' || l === '').join('\n')
+  // Through a link, so the page itself stays put and the inquiry is not lost if the mail program is slow to open.
+  const go = document.createElement('a'); go.id = 'ask-link'; document.getElementById('ask-link')?.remove(); ask.append(go)
+  go.href = `mailto:glasshourproductions@gmail.com?subject=${encodeURIComponent(`Inquiry: ${v.need.toLowerCase()}, from ${v.name}`)}&body=${encodeURIComponent(body)}`
+  go.click()
+}
+ask.addEventListener('submit', async e => {
+  e.preventDefault()
+  const v = Object.fromEntries([...new FormData(ask)].map(([k, x]) => [k, String(x).trim()])), err = document.getElementById('ask-err'), btn = ask.querySelector('button')
+  const missing = !v.name ? 'your name' : !/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v.email) ? 'an email we can answer' : !v.about ? 'a few words about what you need' : ''
+  err.hidden = !missing
+  if (missing) { err.textContent = `It still needs ${missing}.`; return }
+  if (!INBOX) return mailIt(v)
+  btn.disabled = true
+  try {
+    const r = await fetch(`${INBOX}/inquiry`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(v) })
+    const d = await r.json().catch(() => ({}))
+    if (r.status === 400 || r.status === 429) { err.textContent = d.error || 'That did not go through.'; err.hidden = false; return }
+    if (!r.ok) throw new Error('inbox')
+    ask.innerHTML = `<div class="thanks" role="status"><h3>Got it. Thank you, ${v.name.split(' ')[0].replace(/[<>&"]/g, '')}.</h3><p>Your inquiry is with us. We will write back to ${v.email.replace(/[<>&"]/g, '')}.</p></div>`
+  } catch (x) {
+    // The inbox could not be reached: fall back to the visitor's own email so the inquiry still gets to us.
+    askNote.textContent = 'We could not take that directly just now. ' + byMail
+    mailIt(v)
+  } finally { btn.disabled = false }
+})

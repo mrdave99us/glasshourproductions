@@ -48,6 +48,14 @@ const SIZES = [['desktop', 1440, 900, 1, false], ['ultrawide', 3440, 1300, 1, fa
     await js(`new Promise(async r => { for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.8) { scrollTo({ top: y, behavior: 'instant' }); await new Promise(q => setTimeout(q, 120)) } scrollTo({ top: 0, behavior: 'instant' }); setTimeout(r, 600) })`)
     await shot('home', true)
     const home = await facts()
+    // The inquiry form: an empty one is refused in plain words; a filled one is written out as an email addressed to
+    // us (this build has no inbox address, so the email way is the one in use).
+    await js(`document.getElementById('ask').requestSubmit()`)
+    const refused = await js(`document.getElementById('ask-err').hidden ? 'NOT REFUSED' : document.getElementById('ask-err').textContent`)
+    await js(`(() => { const f = document.getElementById('ask'), el = f.elements; el.name.value = 'Test Person'; el.email.value = 'test@example.com'; el.org.value = 'The Alder Room'; el.when.value = 'By March'; el.about.value = 'A new site for our venue.'; f.addEventListener('click', e => { if (e.target.id === 'ask-link') e.preventDefault() }, true); f.requestSubmit() })()`)
+    await sleep(300)
+    const mail = decodeURIComponent(await js(`(document.getElementById('ask-link') || {}).href || 'NO LINK'`))
+    const inquiry = { empty_form: refused, to: mail.split('?')[0], has_all: ['Test Person', 'test@example.com', 'The Alder Room', 'By March', 'A website', 'A new site for our venue.'].every(x => mail.includes(x)) }
     await js(`document.getElementById('tab-custom').click(); document.getElementById('shelf').scrollIntoView(); new Promise(r => setTimeout(r, 400))`)
     await shot('tabs')
     const tab = await js(`[document.getElementById('p-catalog').hidden, document.getElementById('p-custom').hidden, document.getElementById('p-sub').hidden].join(',')`)
@@ -65,7 +73,7 @@ const SIZES = [['desktop', 1440, 900, 1, false], ['ultrawide', 3440, 1300, 1, fa
     await js(`document.querySelector('#grid .item')?.click(); new Promise(r => setTimeout(r, 500))`)
     const open = await js(`document.getElementById('view').open + ' | ' + (document.getElementById('view-title') || {}).textContent`)
     await shot('item')
-    if (!stocked) { console.log(JSON.stringify({ name, home, tabs_hidden: tab, catalog: cat, shelf: 'empty: ' + await js(`document.getElementById('count').textContent`), search_none: none, errors: errors.slice(0, 4) })); await send('Target.closeTarget', { targetId }); continue }
+    if (!stocked) { console.log(JSON.stringify({ name, home, inquiry, tabs_hidden: tab, catalog: cat, shelf: 'empty: ' + await js(`document.getElementById('count').textContent`), search_none: none, errors: errors.slice(0, 4) })); await send('Target.closeTarget', { targetId }); continue }
     // The 360 viewer: open a scene, wait for the full turn to load, drag across it, and prove the view turned.
     await s('Page.navigate', { url: BASE + 'catalog/?i=s-013_021' })
     let ready = ''

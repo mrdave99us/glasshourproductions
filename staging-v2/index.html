@@ -153,11 +153,26 @@
     <div>
       <h2>Contact</h2>
       <p>Tell us what you need built, or ask about anything on the shelf. A person reads every message and writes back.</p>
+      <p class="direct">Or write straight to <a class="link" href="mailto:glasshourproductions@gmail.com">glasshourproductions@gmail.com</a></p>
     </div>
-    <div class="ways">
-      <a class="way" href="mailto:glasshourproductions@gmail.com?subject=A%20project%20for%20Glass%20Hour"><small>Start a project</small><b>glasshourproductions@gmail.com</b><span>What you need, when you need it, and a link to anything you like.</span></a>
-      <a class="way" href="mailto:glasshourproductions@gmail.com?subject=A%20question%20for%20Glass%20Hour"><small>Ask a question</small><b>glasshourproductions@gmail.com</b><span>Templates, scenes, graphics, or a site we already built for you.</span></a>
-    </div>
+    <form class="ask" id="ask" novalidate>
+      <div class="two">
+        <label>Your name<input name="name" autocomplete="name" required maxlength="80"></label>
+        <label>Your email<input name="email" type="email" autocomplete="email" required maxlength="120"></label>
+      </div>
+      <div class="two">
+        <label>What you need
+          <select name="need">
+            <option>A website</option><option>An app or back office</option><option>Brand and graphics</option><option>Hosting and care</option><option>Something from the shelf</option><option>Something else</option>
+          </select></label>
+        <label>When you need it<input name="when" maxlength="80" placeholder="A date, or no rush"></label>
+      </div>
+      <label>Company, band or venue <span>(if there is one)</span><input name="org" autocomplete="organization" maxlength="100"></label>
+      <label>Tell us about it<textarea name="about" rows="5" required maxlength="3000" placeholder="What it is for, what it should do, and a link to anything you like."></textarea></label>
+      <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+      <p class="oops" id="ask-err" role="alert" hidden></p>
+      <div class="send"><button class="btn">Send the inquiry</button><small id="ask-note">This opens your own email with the inquiry written out, ready to send to glasshourproductions@gmail.com. Nothing is sent until you press send there.</small></div>
+    </form>
   </section>
 
   <section class="last wrap">
