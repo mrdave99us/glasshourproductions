@@ -9,6 +9,7 @@ const SITES = [
   ['mmd', 'https://magicalmysterydoors.com/'],
   ['gogogadjet', 'https://gogogadjet.com/'],
   ['blurryface', 'https://blurryfacelivetribute.com/'],
+  ['threehive', 'https://threehive.com/'],
 ]
 const OUT = path.resolve(__dirname, '..', 'public', 'v2', 'work'); fs.mkdirSync(OUT, { recursive: true })
 const PORT = 9700 + Math.floor(Math.random() * 200)

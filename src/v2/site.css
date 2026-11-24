@@ -111,7 +111,9 @@ h2 em, h1 em { font-style: normal; color: var(--sand); }
 .strip > * { scroll-snap-align: start; }
 
 /* sites built for clients */
-.work { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; }
+.work { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.2em; }
+.job { grid-column: span 2; }
+.job:nth-child(-n + 2) { grid-column: span 3; }
 .job { display: block; border-radius: 1em; overflow: hidden; background: var(--panel); border: 1px solid var(--line); transition: transform var(--t2) var(--ease), border-color var(--t2) ease; }
 .job:hover { transform: translateY(-4px); border-color: #4a4d55; }
 .job .pic { aspect-ratio: 16 / 10; overflow: hidden; background: #0d0e10; }
@@ -121,6 +123,7 @@ h2 em, h1 em { font-style: normal; color: var(--sand); }
 .job h3 { margin: 0; font-size: 1.35em; font-weight: 600; letter-spacing: -.02em; }
 .job p { margin: .1em 0 0; color: var(--soft); }
 .job span { color: var(--sand); font-size: .9em; font-weight: 500; white-space: nowrap; }
+.job:nth-child(n + 3) .cap { flex-direction: column; align-items: flex-start; gap: .5em; }
 .job span b { font-weight: 400; }
 
 /* what is being made next */
@@ -289,7 +292,7 @@ body.lp { height: 100vh; height: 100dvh; display: flex; flex-direction: column; 
   .menu, .side a:not(.pill) { display: none; } .bar .row { justify-content: space-between; font-size: .9em; } .search b { display: none; }
   .hero { padding-top: 1.6em; } .track figure { width: 12.5em; } .track figure:nth-child(3n) { width: 9em; } .track figure:nth-child(4n + 1) { width: 15em; }
   .wall { min-height: 17em; } .lead { flex-direction: column; text-align: center; gap: 1.4em; padding-top: 2em; } .btns { justify-content: center; }
-  .sub { flex-direction: column; align-items: flex-start; } .work { grid-template-columns: 1fr; } .job .cap { flex-direction: column; align-items: flex-start; gap: .4em; } .why, .buy, .soonlist { grid-template-columns: 1fr; gap: 1.6em; } .soonlist { gap: .8em; } .buy { gap: 1em; }
+  .sub { flex-direction: column; align-items: flex-start; } .work { grid-template-columns: 1fr; } .job, .job:nth-child(-n + 2) { grid-column: auto; } .job .cap { flex-direction: column; align-items: flex-start; gap: .4em; } .why, .buy, .soonlist { grid-template-columns: 1fr; gap: 1.6em; } .soonlist { gap: .8em; } .buy { gap: 1em; }
   .card { padding: .8em; } .card.made p { font-size: 1.2em; } .open { flex-direction: column; align-items: flex-start; padding: 1.6em; }
   .strip { grid-auto-columns: 72%; } .rule { margin: 4em 3vw; } .last { padding: 4.5em 0; }
   .shelfgrid { grid-template-columns: repeat(2, 1fr); gap: .7em; } .item { padding: .5em .5em .7em; }
