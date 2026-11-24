@@ -26,6 +26,13 @@ function found() {
   return state.c === 'graphic' ? hit.sort((a, b) => (a.id < b.id ? 1 : -1)) : hit
 }
 function draw() {
+  // Nothing has been picked for the shelf yet: say so, and point at what there is.
+  if (!items.length) {
+    chips.hidden = groups.hidden = true
+    count.textContent = 'Nothing is on the shelf yet. We are hand-picking what goes up.'
+    grid.innerHTML = `<p class="none"><a class="btn" href="/staging-v2/#work">See the sites we built</a> <a class="btn ghost" href="/staging-v2/#order">Start a project</a></p>`
+    return
+  }
   const list = found()
   chips.innerHTML = CHIPS.map(([k, label]) => `<button type="button" data-c="${k}" aria-pressed="${state.c === k}">${label}<span>${k ? items.filter(i => i.kind === k).length : items.length}</span></button>`).join('')
   for (const a of document.querySelectorAll('.menu a[data-c]')) a.toggleAttribute('aria-current', a.dataset.c === state.c)

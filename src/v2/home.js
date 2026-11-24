@@ -1,23 +1,31 @@
 // Home page: the wall of work behind the headline, the latest pieces, and the tabs on the shelf.
-import { SHORT, byId, img, itemCard, items } from './shared.js'
+import { img, itemCard, items } from './shared.js'
 import { prices, storeBar, storeOn, usd } from './store.js'
 
-// The wall: two rows drifting opposite ways. Each row is laid twice so the loop has no seam.
-const ROWS = [
-  ['t-orbit', 's-009_022', 's-007_021', 's-006_026', 's-008_037', 't-confetti', 's-011_016', 's-012_012', 's-011_031'],
-  ['s-006_021', 's-007_023', 't-flightdeck', 's-011_026', 's-006_036', 's-013_021', 's-008_033', 's-011_021', 's-007_020'],
-]
-const figure = it => `<figure><img src="${img(it.id)}" alt="" width="800" height="500"><figcaption>${SHORT[it.kind]}</figcaption></figure>`
-document.getElementById('wall').innerHTML = ROWS.map(row => {
-  const one = row.map(byId).filter(Boolean).map(figure).join('')
-  return `<div class="track">${one}${one}</div>`
+// The wall behind the headline: the sites we built for clients, two rows drifting opposite ways. Each row is laid
+// several times so the loop has no seam.
+const WORK = ['blueraven', 'mmd', 'gogogadjet', 'blurryface', 'threehive']
+const figure = slug => `<figure><img src="/v2/work/${slug}.jpg" alt="" width="1200" height="750"><figcaption>Client site</figcaption></figure>`
+document.getElementById('wall').innerHTML = [WORK, [...WORK.slice(2), ...WORK.slice(0, 2)]].map(row => {
+  const one = row.map(figure).join('')
+  return `<div class="track">${one}${one}${one}${one}</div>`
 }).join('')
 
-const FRESH = ['t-orbit', 's-013_021', 's-007_021', 't-flightdeck', 's-008_037', 's-011_026', 't-confetti', 's-012_012', 's-006_036', 's-006_021']
-document.getElementById('strip').innerHTML = FRESH.map(byId).filter(Boolean).map(it => itemCard(it)).join('')
-
-// The web graphics card counts what is really on the shelf.
-for (const el of document.querySelectorAll('[data-count]')) el.textContent = `${items.filter(i => i.kind === el.dataset.count).length} and counting`
+// The shelf holds only what has been hand-picked. Each kind's card shows a piece and a count when it has any; the
+// latest pieces and the catalog-first wording appear once there is something to browse.
+for (const card of document.querySelectorAll('.kindcard')) {
+  const mine = items.filter(i => i.kind === card.dataset.kind)
+  if (!mine.length) continue
+  const note = card.querySelector('small'), pic = card.querySelector('.pic')
+  note.textContent = `${mine.length} on the shelf`; note.classList.remove('soon')
+  pic.innerHTML = `<img src="${img(mine[0].id)}" alt="" loading="lazy" width="800" height="500">`; pic.hidden = false
+}
+if (items.length) {
+  document.getElementById('strip').innerHTML = items.slice(0, 10).map(it => itemCard(it)).join('')
+  for (const el of document.querySelectorAll('[data-fresh]')) el.hidden = false
+  document.getElementById('lead').textContent = 'Website templates, 360 scenes and web graphics from a working studio. Buy one, subscribe for all of it, or hire us to build yours.'
+  document.getElementById('leadbtns').innerHTML = '<a class="btn" href="/staging-v2/catalog/">Browse the catalog</a><a class="btn ghost" href="#order">Hire the studio</a>'
+}
 
 storeBar()
 if (storeOn) prices().then(p => {

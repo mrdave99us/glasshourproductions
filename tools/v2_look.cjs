@@ -57,13 +57,15 @@ const SIZES = [['desktop', 1440, 900, 1, false], ['ultrawide', 3440, 1300, 1, fa
     const pool = await js(`document.querySelectorAll('#grid .item').length + ' | ' + document.getElementById('count').textContent + ' | ' + location.search`)
     await js(`(() => { const q = document.getElementById('q'); q.value = 'zzzz'; q.dispatchEvent(new Event('input', { bubbles: true })) })()`)
     const none = await js(`document.querySelector('#grid .none') ? 'empty note shown' : 'NO empty note'`)
-    await js(`(() => { const q = document.getElementById('q'); q.value = ''; q.dispatchEvent(new Event('input', { bubbles: true })); document.querySelector('#chips [data-c=""]').click() })()`)
+    await js(`(() => { const q = document.getElementById('q'); q.value = ''; q.dispatchEvent(new Event('input', { bubbles: true })); document.querySelector('#chips [data-c=""]')?.click() })()`)
     await sleep(900)
     await shot('catalog')
     const cat = await facts()
-    await js(`document.querySelector('#grid .item').click(); new Promise(r => setTimeout(r, 500))`)
-    const open = await js(`document.getElementById('view').open + ' | ' + document.getElementById('view-title').textContent`)
+    const stocked = (await js(`document.querySelectorAll('#grid .item').length`)) > 0
+    await js(`document.querySelector('#grid .item')?.click(); new Promise(r => setTimeout(r, 500))`)
+    const open = await js(`document.getElementById('view').open + ' | ' + (document.getElementById('view-title') || {}).textContent`)
     await shot('item')
+    if (!stocked) { console.log(JSON.stringify({ name, home, tabs_hidden: tab, catalog: cat, shelf: 'empty: ' + await js(`document.getElementById('count').textContent`), search_none: none, errors: errors.slice(0, 4) })); await send('Target.closeTarget', { targetId }); continue }
     // The 360 viewer: open a scene, wait for the full turn to load, drag across it, and prove the view turned.
     await s('Page.navigate', { url: BASE + 'catalog/?i=s-013_021' })
     let ready = ''

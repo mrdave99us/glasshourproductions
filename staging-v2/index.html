@@ -30,8 +30,8 @@
       <h1>Ready-made,<br>or <em>made to order.</em></h1>
     </div>
     <div class="lead wrap">
-      <p>Website templates, 360 scenes, web graphics and motion from a working studio. Buy one, subscribe for all of it, or hire us to build yours.</p>
-      <div class="btns"><a class="btn" href="/staging-v2/catalog/">Browse the catalog</a><a class="btn ghost" href="#order">Hire the studio</a></div>
+      <p id="lead">We build websites and apps to order. A shelf of templates, 360 scenes and web graphics is being stocked now, one hand-picked piece at a time.</p>
+      <div class="btns" id="leadbtns"><a class="btn" href="#work">See our work</a><a class="btn ghost" href="#order">Hire the studio</a></div>
     </div>
   </section>
 
@@ -47,10 +47,10 @@
       </div>
     </div>
     <div class="grid" role="tabpanel" id="p-catalog" aria-labelledby="tab-catalog">
-      <a class="card" href="/staging-v2/catalog/?c=template"><h3>Website templates</h3><small>6 and counting</small><div class="pic"><img src="/v2/img/t-orbit.jpg" alt="Orbit, a website template with a star map hero" loading="lazy"></div></a>
-      <a class="card" href="/staging-v2/catalog/?c=scene"><h3>360 scenes</h3><small>220+</small><div class="pic"><img src="/v2/img/s-011_026.jpg" alt="A glass conservatory garden, a 360 scene" loading="lazy"></div></a>
-      <a class="card" href="/staging-v2/catalog/?c=graphic"><h3>Web graphics</h3><small data-count="graphic">Backgrounds, backdrops, icons</small><div class="pic"><img src="/v2/img/s-007_021.jpg" alt="Flowing gradient waves, a background for a website hero" loading="lazy"></div></a>
-      <div class="card"><h3>Motion graphics</h3><small class="soon">In the works</small><div class="pic"><img src="/v2/img/m-stage.jpg" alt="Stage lights coming up, a motion piece" loading="lazy"></div></div>
+      <a class="card kindcard" data-kind="template" href="/staging-v2/catalog/?c=template"><h3>Website templates</h3><small class="soon">Being hand-picked</small><div class="pic" hidden></div></a>
+      <a class="card kindcard" data-kind="scene" href="/staging-v2/catalog/?c=scene"><h3>360 scenes</h3><small class="soon">Being hand-picked</small><div class="pic" hidden></div></a>
+      <a class="card kindcard" data-kind="graphic" href="/staging-v2/catalog/?c=graphic"><h3>Web graphics</h3><small class="soon">Being hand-picked</small><div class="pic" hidden></div></a>
+      <div class="card"><h3>Motion graphics</h3><small class="soon">In the works</small></div>
       <a class="card made wide" href="#order"><h3>Custom work</h3><small>Sites, apps, brand</small><p>Not on the shelf? We build it.</p><u>Start a project</u></a>
     </div>
     <div class="grid" role="tabpanel" id="p-custom" aria-labelledby="tab-custom" hidden>
@@ -84,9 +84,9 @@
     </div>
   </section>
 
-  <div class="rule" aria-hidden="true"></div>
+  <div class="rule" aria-hidden="true" data-fresh hidden></div>
 
-  <section class="wrap" id="fresh">
+  <section class="wrap" id="fresh" data-fresh hidden>
     <h2>Fresh on the shelf</h2>
     <div class="sub"><span>A few of the latest pieces.</span><a class="more" href="/staging-v2/catalog/">See everything</a></div>
     <div class="strip" id="strip"></div>
@@ -140,7 +140,7 @@
     <h2>Questions</h2>
     <div>
       <details open><summary>What is Glass Hour?</summary><p>A development studio with a shelf. We build websites, apps and brand work for clients, and we publish templates, scenes and graphics that anyone can pick up and use.</p></details>
-      <details><summary>What is on the shelf?</summary><p>Website templates, 360 scenes for backdrops and virtual sets, and graphics for building websites: backgrounds, textures, product backdrops, icons and seasonal banners. Motion graphics are in the works.</p></details>
+      <details><summary>What is on the shelf?</summary><p>Website templates, 360 scenes for backdrops and virtual sets, and graphics for building websites: backgrounds, textures, product backdrops, icons and seasonal banners. Motion graphics are in the works. We are hand-picking the first pieces now, so the shelf fills as we go.</p></details>
       <details><summary>Is the stock made with AI?</summary><p>Some of it. Scenes and graphics marked AI were generated and finished in our studio. Website templates and custom work are designed and built by hand.</p></details>
       <details><summary>How do I buy?</summary><p>Two ways: one piece at a time, or a subscription that covers everything. The store is not open yet, so for now write to us and we will get you what you need.</p></details>
       <details><summary>Can you build something just for me?</summary><p>Yes. That is the other half of what we do. Tell us what you need and we will come back with a plan.</p></details>
