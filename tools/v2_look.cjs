@@ -64,7 +64,52 @@ const SIZES = [['desktop', 1440, 900, 1, false], ['ultrawide', 3440, 1300, 1, fa
     await js(`document.querySelector('#grid .item').click(); new Promise(r => setTimeout(r, 500))`)
     const open = await js(`document.getElementById('view').open + ' | ' + document.getElementById('view-title').textContent`)
     await shot('item')
-    console.log(JSON.stringify({ name, home, tabs_hidden: tab, catalog: cat, scenes, search_pool: pool, search_none: none, item: open, errors: errors.slice(0, 4) }))
+    // The 360 viewer: open a scene, wait for the full turn to load, drag across it, and prove the view turned.
+    await s('Page.navigate', { url: BASE + 'catalog/?i=s-013_021' })
+    let ready = ''
+    for (let i = 0; i < 40 && ready !== 'ready'; i++) { await sleep(250); ready = await js(`(document.querySelector('#view .pic') || {dataset:{}}).dataset.pano || ''`) }
+    await sleep(900)
+    const box = await js(`(() => { const r = document.querySelector('#view .pic').getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2, r.width] })()`)
+    const before = (await s('Page.captureScreenshot', { format: 'jpeg', quality: 60 })).data
+    const yaw0 = +(await js(`document.querySelector('#view .pic').dataset.yaw`))
+    const pt = mobile ? 'touch' : 'mouse'
+    await s('Input.dispatchMouseEvent', { type: 'mousePressed', x: box[0], y: box[1], button: 'left', clickCount: 1, pointerType: pt })
+    for (let i = 1; i <= 12; i++) { await s('Input.dispatchMouseEvent', { type: 'mouseMoved', x: box[0] + i * box[2] * 0.03, y: box[1] - i * 2, button: 'left', buttons: 1, pointerType: pt }); await sleep(16) }
+    await s('Input.dispatchMouseEvent', { type: 'mouseReleased', x: box[0] + box[2] * 0.36, y: box[1] - 24, button: 'left', pointerType: pt })
+    await sleep(1200)
+    const yaw1 = +(await js(`document.querySelector('#view .pic').dataset.yaw`))
+    await shot('pano')
+    const after = (await s('Page.captureScreenshot', { format: 'jpeg', quality: 60 })).data
+    const viewer = { loaded: ready, yaw_before: yaw0, yaw_after: yaw1, turned: Math.abs(yaw1 - yaw0) > 0.2, picture_changed: before !== after, tip_gone: await js(`document.querySelector('.pano-tip').classList.contains('off')`) }
+    // Flat: the whole turn unrolled. The viewer goes away, the full picture is shown, and back again.
+    await js(`document.querySelector('.modes [data-flat="1"]').click(); new Promise(r => setTimeout(r, 1200))`)
+    viewer.flat = await js(`(() => { const p = document.querySelector('#view .pic'), i = p.querySelector('img'); return { canvases: p.querySelectorAll('canvas').length, full_picture: i.src.includes('/v2/pano/') && i.naturalWidth, pressed: document.querySelector('.modes [aria-pressed="true"]').textContent } })()`)
+    await shot('flat')
+    await js(`document.querySelector('.modes [data-flat="0"]').click()`)
+    let back = ''
+    for (let i = 0; i < 40 && back !== 'ready'; i++) { await sleep(250); back = await js(`document.querySelector('#view .pic').dataset.pano || ''`) }
+    viewer.back_to_360 = back
+    await js(`document.getElementById('view').close(); new Promise(r => setTimeout(r, 300))`)
+    const cleaned = await js(`document.querySelectorAll('canvas.pano').length`)
+    // Live preview of a template: it runs, the page picker moves it, a click inside it is followed, sizes change it.
+    await s('Page.navigate', { url: BASE + 'catalog/?i=t-orbit' }); await sleep(1500)
+    const link = await js(`(document.querySelector('#view a[href*="/preview/"]') || {}).href || 'NO LINK'`)
+    await s('Page.navigate', { url: BASE + 'preview/?t=orbit' }); await sleep(3500)
+    const inside = () => js(`(() => { const f = document.getElementById('lp-view'); try { return f.contentWindow.location.pathname.split('/').pop() + ' | ' + f.contentDocument.title } catch (e) { return 'blocked ' + e.message } })()`)
+    const preview = { link: link.replace(/^https?:\/\/[^/]+/, ''), first: await inside(), pages: await js(`document.getElementById('lp-page').options.length`) }
+    await shot('preview')
+    await js(`(() => { const p = document.getElementById('lp-page'); p.value = 'tour.html'; p.dispatchEvent(new Event('change', { bubbles: true })) })()`); await sleep(2500)
+    preview.picked = await inside() + ' | ' + await js(`location.search`)
+    await js(`(() => { const d = document.getElementById('lp-view').contentDocument; const a = [...d.querySelectorAll('a[href]')].find(a => /gallery\.html/.test(a.getAttribute('href'))); if (a) a.click() })()`); await sleep(2500)
+    preview.clicked_inside = await inside() + ' | picker ' + await js(`document.getElementById('lp-page').value`)
+    if (!mobile) {
+      await js(`document.querySelector('#lp-sizes [data-w="390"]').click()`); await sleep(900)
+      preview.phone_width = await js(`Math.round(document.getElementById('lp-view').getBoundingClientRect().width) + ' | ' + location.search`)
+      await shot('preview-phone')
+    }
+    await s('Page.navigate', { url: BASE + 'preview/?t=nothing' }); await sleep(800)
+    preview.unknown = await js(`document.getElementById('lp-none').hidden ? 'NO NOTE' : 'note shown'`)
+    console.log(JSON.stringify({ name, home, tabs_hidden: tab, catalog: cat, scenes, search_pool: pool, search_none: none, item: open, viewer, canvases_after_close: cleaned, preview, errors: errors.slice(0, 4) }))
     await send('Target.closeTarget', { targetId })
   }
   killTree(); process.exit(0)

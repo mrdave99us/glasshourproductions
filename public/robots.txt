@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /staging/
 Disallow: /staging-v2/
+Disallow: /v2/demo/

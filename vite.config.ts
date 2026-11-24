@@ -14,6 +14,7 @@ export default defineConfig({
         staging: 'staging/index.html',
         stagingV2: 'staging-v2/index.html',
         stagingV2Catalog: 'staging-v2/catalog/index.html',
+        stagingV2Preview: 'staging-v2/preview/index.html',
       },
     },
   },

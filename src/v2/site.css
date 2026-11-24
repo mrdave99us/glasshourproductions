@@ -164,12 +164,58 @@ dialog::backdrop { background: rgba(5, 6, 8, .78); backdrop-filter: blur(6px); }
 .view small { color: var(--sand); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: .76em; }
 .view h2 { font-size: 1.9em; margin: .35em 0 .5em; line-height: 1.08; }
 .view p { margin: 0 0 1em; color: var(--soft); }
-.view .btn { align-self: flex-start; margin-top: auto; }
-.view .x { position: absolute; right: .8em; top: .8em; width: 2.3em; height: 2.3em; border-radius: 50%; background: rgba(13, 14, 16, .8); font-size: 1em; }
+.view .btns { margin-top: auto; padding-top: .6em; }
+.view .pic { position: relative; }
+.view.scene { grid-template-columns: 1fr; }
+.view.scene .pic { aspect-ratio: 2 / 1; max-height: 66vh; width: 100%; }
+.view.scene .txt { display: grid; grid-template-columns: 1fr auto; column-gap: 2.5em; align-items: end; padding: 1.5em 2em 1.7em; }
+.view.scene .txt > * { grid-column: 1; }
+.view.scene .txt .btns { grid-column: 2; grid-row: 1 / span 9; align-self: center; margin: 0; padding: 0; }
+.view.scene .txt p { margin-bottom: .5em; max-width: 48em; }
+.pano { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity .6s ease; cursor: grab; touch-action: none; outline-offset: -3px; }
+.pano.on { opacity: 1; }
+.pano:active { cursor: grabbing; }
+.pano-tip { position: absolute; left: 50%; bottom: 1em; transform: translateX(-50%); padding: .5em 1em; border-radius: 999px; background: rgba(13, 14, 16, .78); font-size: .8em; font-weight: 500; pointer-events: none; transition: opacity .5s ease; white-space: nowrap; }
+.pano-tip.off { opacity: 0; }
+.pano-full { position: absolute; right: .8em; bottom: .8em; width: 2.4em; height: 2.4em; border-radius: 50%; background: rgba(13, 14, 16, .78); display: grid; place-items: center; }
+.pano-full svg { width: 1em; height: 1em; }
+.modes { position: absolute; z-index: 1; left: .8em; top: .8em; display: flex; padding: .22em; border-radius: 999px; background: rgba(13, 14, 16, .78); font-size: .8em; font-weight: 500; }
+.modes button { padding: .42em .95em; border-radius: 999px; color: var(--soft); transition: background var(--t1) ease, color var(--t1) ease; }
+.modes button[aria-pressed="true"] { background: var(--sand); color: var(--on-sand); }
+.pic.flat { background: #000; }
+.pic.flat img { object-fit: contain; }
+.pic:fullscreen img { object-fit: contain; }
+.pic:fullscreen { aspect-ratio: auto; max-height: none; width: 100vw; height: 100vh; background: #000; }
+.view .x { position: absolute; z-index: 2; right: .8em; top: .8em; width: 2.3em; height: 2.3em; border-radius: 50%; background: rgba(13, 14, 16, .8); font-size: 1em; }
+
+/* live preview of a template: a thin bar, and the template itself in a frame that can be sized like a device */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+body.lp { height: 100vh; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; background: #07080a; }
+.lp-bar { display: flex; align-items: center; gap: 1.3em; height: 3.5em; padding: 0 1em; background: var(--bg); border-bottom: 1px solid var(--line); font-size: .86em; flex: none; }
+.lp-back { display: flex; align-items: center; gap: .55em; font-weight: 700; white-space: nowrap; }
+.lp-back svg { width: .78em; height: 1em; }
+.lp-what { display: flex; align-items: center; gap: .9em; margin-right: auto; min-width: 0; padding-left: 1.3em; border-left: 1px solid var(--line); }
+.lp-what strong { font-size: 1.12em; white-space: nowrap; }
+.lp-pick select { max-width: 16em; padding: .5em 2.1em .5em .9em; border-radius: .55em; border: 1px solid var(--line); background: #1a1c20 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23a9a59c' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right .8em center / .65em; color: var(--ink); font: inherit; appearance: none; cursor: pointer; }
+.lp-sizes { display: flex; gap: .2em; padding: .22em; border-radius: 999px; background: #1a1c20; }
+.lp-sizes button { width: 2.7em; height: 2.1em; border-radius: 999px; display: grid; place-items: center; color: var(--soft); transition: background var(--t1) ease, color var(--t1) ease; }
+.lp-sizes button[aria-pressed="true"] { background: var(--sand); color: var(--on-sand); }
+.lp-sizes svg { height: 1.05em; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.lp-do { display: flex; align-items: center; gap: 1.3em; white-space: nowrap; }
+.lp-plain { opacity: .8; } .lp-plain:hover { opacity: 1; }
+.lp-stage { flex: 1; min-height: 0; display: grid; place-items: center; overflow: hidden; }
+.lp-frame { width: var(--w, 100%); max-width: 100%; height: 100%; background: #fff; overflow: hidden; opacity: 0; transition: width .45s var(--ease), height .45s var(--ease), border-radius .45s var(--ease), opacity .4s ease; }
+.lp-frame.in { opacity: 1; }
+.lp-frame.device { height: calc(100% - 3em); max-width: calc(100% - 2em); border-radius: 1.3em; box-shadow: 0 0 0 .5em #1c1e22, 0 0 0 .56em #2c2f35, 0 1.6em 4em rgba(0, 0, 0, .6); }
+.lp-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.lp-none { color: var(--soft); } .lp-none a { color: var(--sand); border-bottom: 1px solid currentColor; }
+@media (max-width: 900px) { .lp-sizes, .lp-plain, .lp-back span { display: none; } .lp-bar { gap: .8em; } .lp-what { padding-left: .8em; } .lp-pick select { max-width: 9.5em; }
+  .lp-frame.device { height: 100%; max-width: 100%; border-radius: 0; box-shadow: none; width: 100%; } }
 
 @media (max-width: 1100px) {
   .menu a:nth-child(n + 4) { display: none; } .grid { grid-template-columns: repeat(2, 1fr); } .strip { grid-auto-columns: calc((100% - 1em) / 2.2); }
   .order, .faq { grid-template-columns: 1fr; gap: 2.2em; } .view { grid-template-columns: 1fr; }
+  .view.scene .txt { display: flex; align-items: stretch; } .view.scene .txt .btns { margin-top: .6em; justify-content: flex-start; } .view.scene .pic { aspect-ratio: 3 / 2; }
 }
 @media (max-width: 760px) {
   .menu, .side a:not(.pill) { display: none; } .bar .row { justify-content: space-between; font-size: .9em; } .search b { display: none; }

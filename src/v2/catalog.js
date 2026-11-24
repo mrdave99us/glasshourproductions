@@ -1,5 +1,6 @@
 // The shelf: every piece, with the kind chips and the search box working, and a closer look at any one of them.
 // The address carries the state (?c=scene&q=pool&i=s-013_021), so the home page's links and search land here.
+import { mountPano } from './pano.js'
 import { KIND, byId, img, itemCard, items } from './shared.js'
 
 const grid = document.getElementById('grid'), chips = document.getElementById('chips'), count = document.getElementById('count')
@@ -34,17 +35,40 @@ q.addEventListener('input', () => { state.q = q.value.trim(); draw() })
 document.getElementById('search').addEventListener('submit', e => { e.preventDefault(); q.blur() })
 
 // A closer look. The store is not open, so the one thing to do is ask for the piece.
+// A 360 scene opens as a view you can turn; everything else as its picture.
+let pano = null
 function show(it) {
   const ask = `mailto:glasshourproductions@gmail.com?subject=${encodeURIComponent(`${KIND[it.kind]}: ${it.title}`)}`
-  view.innerHTML = `<div class="view"><div class="pic"><img src="${img(it.id)}" alt="${esc(it.title)}" width="800" height="500"></div>
+  view.innerHTML = `<div class="view${it.pano ? ' scene' : ''}"><div class="pic"><img src="${img(it.id)}" alt="${esc(it.title)}" width="800" height="500"></div>
     <div class="txt"><small>${KIND[it.kind]}${it.pages ? `, ${it.pages} pages` : ''}</small><h2 id="view-title">${esc(it.title)}</h2>
     ${it.note ? `<p>${esc(it.note)}</p>` : ''}${it.words && it.kind !== 'template' ? `<p>${esc(it.words)}.</p>` : ''}
+    ${it.pano ? '<p>A full 360 turn, for backdrops, virtual sets and lighting. Drag the picture to look around, or see it flat.</p>' : ''}
     ${it.ai ? '<p>Made with image generation and finished in our studio.</p>' : '<p>Designed and built by hand.</p>'}
     <p>The store is not open yet. Ask and we will get it to you.</p>
-    <a class="btn" href="${ask}">Ask for this piece</a></div>
+    <div class="btns">${it.demo ? `<a class="btn" href="/staging-v2/preview/?t=${it.demo.slug}">Live preview</a>` : ''}<a class="btn${it.demo ? ' ghost' : ''}" href="${ask}">Ask for this piece</a></div></div>
     <form method="dialog"><button class="x" aria-label="Close">&#10005;</button></form></div>`
   view.showModal()
+  if (it.pano) scene(it)
 }
+// A 360 scene has two ways to be seen: standing inside it, or flat, the whole turn unrolled as the file itself is.
+// The choice is kept while the visitor browses.
+let flat = false
+function scene(it) {
+  const pic = view.querySelector('.pic'), image = pic.querySelector('img'), full = `/v2/pano/${it.id}.jpg`
+  pic.insertAdjacentHTML('beforeend', `<div class="modes" role="group" aria-label="How to view it"><button type="button" data-flat="0">Look around</button><button type="button" data-flat="1">Flat</button></div>`)
+  const set = () => {
+    if (pano) { pano.destroy(); pano = null }
+    delete pic.dataset.pano
+    pic.classList.toggle('flat', flat)
+    image.src = flat ? full : img(it.id)
+    image.alt = flat ? `${it.title}, the full 360 turn laid flat` : it.title
+    for (const b of pic.querySelectorAll('.modes button')) b.setAttribute('aria-pressed', String((b.dataset.flat === '1') === flat))
+    if (!flat) pano = mountPano(pic, full, { label: it.title })
+  }
+  pic.querySelector('.modes').addEventListener('click', e => { const b = e.target.closest('button'); if (b) { flat = b.dataset.flat === '1'; set() } })
+  set()
+}
+view.addEventListener('close', () => { if (pano) { pano.destroy(); pano = null } })
 grid.addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) show(byId(b.dataset.id)) })
 view.addEventListener('click', e => { if (e.target === view) view.close() })
 

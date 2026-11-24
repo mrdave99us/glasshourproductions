@@ -4,9 +4,89 @@
   "kind": "template",
   "title": "Confetti",
   "note": "Sixteen pages for a service business that sells by the event, with two home page designs.",
-  "pages": 16,
+  "pages": 15,
   "ai": false,
-  "words": "events weddings service multi-page light HTML"
+  "words": "events weddings service multi-page light HTML",
+  "demo": {
+   "slug": "confetti",
+   "pages": [
+    {
+     "file": "index.html",
+     "name": "Home",
+     "title": "Confetti | Your event on every guest's phone, ready in one hour"
+    },
+    {
+     "file": "home-2.html",
+     "name": "Home, second design",
+     "title": "Confetti | Home 2"
+    },
+    {
+     "file": "contact.html",
+     "name": "Contact",
+     "title": "Contact | Confetti"
+    },
+    {
+     "file": "demo-baby-showers.html",
+     "name": "Demo baby showers",
+     "title": "Baby Showers Demo | Confetti"
+    },
+    {
+     "file": "demo-birthdays.html",
+     "name": "Demo birthdays",
+     "title": "Birthdays Demo | Confetti"
+    },
+    {
+     "file": "demo-corporate.html",
+     "name": "Demo corporate",
+     "title": "Corporate Events Demo | Confetti"
+    },
+    {
+     "file": "demo-weddings.html",
+     "name": "Demo weddings",
+     "title": "Weddings Demo | Confetti"
+    },
+    {
+     "file": "demos.html",
+     "name": "Demos",
+     "title": "Demos | Confetti"
+    },
+    {
+     "file": "how-it-works.html",
+     "name": "How it works",
+     "title": "How it works | Confetti"
+    },
+    {
+     "file": "onboarding.html",
+     "name": "Onboarding",
+     "title": "Customer onboarding | Confetti"
+    },
+    {
+     "file": "pricing.html",
+     "name": "Pricing",
+     "title": "Pricing | Confetti"
+    },
+    {
+     "file": "privacy.html",
+     "name": "Privacy",
+     "title": "Confetti Privacy Policy"
+    },
+    {
+     "file": "reviews.html",
+     "name": "Reviews",
+     "title": "Reviews | Confetti"
+    },
+    {
+     "file": "terms.html",
+     "name": "Terms",
+     "title": "Confetti Terms of Service"
+    },
+    {
+     "file": "what-to-expect.html",
+     "name": "What to expect",
+     "title": "What to expect from your Confetti"
+    }
+   ]
+  }
  },
  {
   "id": "t-flightdeck",
@@ -15,16 +95,176 @@
   "note": "A portfolio that behaves like a control console, with a shareable page for every project.",
   "pages": 22,
   "ai": false,
-  "words": "portfolio agency studio app-like dark HTML"
+  "words": "portfolio agency studio app-like dark HTML",
+  "demo": {
+   "slug": "flightdeck",
+   "pages": [
+    {
+     "file": "index.html",
+     "name": "Home",
+     "title": "Slow Lightning Studio"
+    },
+    {
+     "file": "home-2.html",
+     "name": "Home, second design",
+     "title": "Slow Lightning | Home 2 (light)"
+    },
+    {
+     "file": "about.html",
+     "name": "About",
+     "title": "About the studio | Slow Lightning"
+    },
+    {
+     "file": "contact.html",
+     "name": "Contact",
+     "title": "Contact | Slow Lightning"
+    },
+    {
+     "file": "development.html",
+     "name": "Development",
+     "title": "In development | Slow Lightning"
+    },
+    {
+     "file": "lab-metronome.html",
+     "name": "Lab metronome",
+     "title": "Metronome | Slow Lightning"
+    },
+    {
+     "file": "lab-signal-fire.html",
+     "name": "Lab signal fire",
+     "title": "Signal Fire | Slow Lightning"
+    },
+    {
+     "file": "lab-tidepool.html",
+     "name": "Lab tidepool",
+     "title": "Tidepool | Slow Lightning"
+    },
+    {
+     "file": "lab-wayfinder.html",
+     "name": "Lab wayfinder",
+     "title": "Wayfinder | Slow Lightning"
+    },
+    {
+     "file": "privacy.html",
+     "name": "Privacy",
+     "title": "Privacy policy | Slow Lightning"
+    },
+    {
+     "file": "projects.html",
+     "name": "Projects",
+     "title": "Projects | Slow Lightning"
+    },
+    {
+     "file": "terms.html",
+     "name": "Terms",
+     "title": "Terms of service | Slow Lightning"
+    },
+    {
+     "file": "work-atlas-cycles.html",
+     "name": "Work atlas cycles",
+     "title": "Atlas Cycles | Slow Lightning"
+    },
+    {
+     "file": "work-foxglove.html",
+     "name": "Work foxglove",
+     "title": "Foxglove Florist | Slow Lightning"
+    },
+    {
+     "file": "work-harbor-lights.html",
+     "name": "Work harbor lights",
+     "title": "Harbor Lights | Slow Lightning"
+    },
+    {
+     "file": "work-long-way-round.html",
+     "name": "Work long way round",
+     "title": "Long Way Round | Slow Lightning"
+    },
+    {
+     "file": "work-night-bus.html",
+     "name": "Work night bus",
+     "title": "Night Bus | Slow Lightning"
+    },
+    {
+     "file": "work-north-pier.html",
+     "name": "Work north pier",
+     "title": "North Pier Festival | Slow Lightning"
+    },
+    {
+     "file": "work-paper-moons.html",
+     "name": "Work paper moons",
+     "title": "Paper Moons | Slow Lightning"
+    },
+    {
+     "file": "work-quiet-hours.html",
+     "name": "Work quiet hours",
+     "title": "Quiet Hours | Slow Lightning"
+    },
+    {
+     "file": "work-saltwater.html",
+     "name": "Work saltwater",
+     "title": "Saltwater Kitchen | Slow Lightning"
+    },
+    {
+     "file": "work-the-lantern.html",
+     "name": "Work the lantern",
+     "title": "The Lantern | Slow Lightning"
+    }
+   ]
+  }
  },
  {
   "id": "t-orbit",
   "kind": "template",
   "title": "Orbit",
   "note": "A star map hero with three orbiting chapters of the show, written from scratch.",
-  "pages": 9,
+  "pages": 8,
   "ai": false,
-  "words": "band show theatre concert dark HTML"
+  "words": "band show theatre concert dark HTML",
+  "demo": {
+   "slug": "orbit",
+   "pages": [
+    {
+     "file": "index.html",
+     "name": "Home",
+     "title": "The Long Way Round | A concert in three orbits"
+    },
+    {
+     "file": "home-2.html",
+     "name": "Home, second design",
+     "title": "The Long Way Round | Now touring"
+    },
+    {
+     "file": "company.html",
+     "name": "Company",
+     "title": "Company | The Long Way Round"
+    },
+    {
+     "file": "contact.html",
+     "name": "Contact",
+     "title": "Contact | The Long Way Round"
+    },
+    {
+     "file": "gallery.html",
+     "name": "Gallery",
+     "title": "Gallery | The Long Way Round"
+    },
+    {
+     "file": "the-show.html",
+     "name": "The show",
+     "title": "The show | The Long Way Round"
+    },
+    {
+     "file": "tour.html",
+     "name": "Tour",
+     "title": "Tour | The Long Way Round"
+    },
+    {
+     "file": "watch.html",
+     "name": "Watch",
+     "title": "Watch | The Long Way Round"
+    }
+   ]
+  }
  },
  {
   "id": "s-006_001",
@@ -32,6 +272,7 @@
   "title": "Empty supermarket interior with stocked aisles",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "supermarket, grocery store, retail, aisle, shelves, shopping, store interior, convenience store, market"
  },
  {
@@ -40,6 +281,7 @@
   "title": "Empty modern open plan office interior",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "office, workplace, open plan, desks, corporate, business, coworking, workspace, computers"
  },
  {
@@ -48,6 +290,7 @@
   "title": "Photography studio with softbox lights and white cyclorama",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "photo studio, softbox, studio lighting, cyclorama, photography, white backdrop, product lighting, film set, studio hdri"
  },
  {
@@ -56,6 +299,7 @@
   "title": "Empty airport terminal departure gate at sunrise",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "airport, terminal, departure gate, travel, waiting area, aviation, transportation hub, seats, runway view"
  },
  {
@@ -64,6 +308,7 @@
   "title": "Data center server room with rows of racks",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "server room, data center, cloud computing, racks, network, technology, hosting, cyber, it infrastructure"
  },
  {
@@ -72,6 +317,7 @@
   "title": "Alpine meadow and mountain lake under blue sky",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "mountains, alpine meadow, lake, wildflowers, snow peaks, nature, landscape, hiking, outdoors"
  },
  {
@@ -80,6 +326,7 @@
   "title": "Green grass field under blue sky with clouds",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "grass field, blue sky, clouds, meadow, sunny day, countryside, outdoor lighting, summer, horizon"
  },
  {
@@ -88,6 +335,7 @@
   "title": "Alien planet landscape with rock spires and two moons",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "alien planet, science fiction, extraterrestrial, fantasy landscape, space, moons, otherworldly, sci-fi world, exoplanet"
  },
  {
@@ -96,6 +344,7 @@
   "title": "Colorful palette knife painting of an owl with golden eyes",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "owl, bird, feathers, wisdom, night bird, animal portrait, wildlife, nocturnal, raptor"
  },
  {
@@ -104,6 +353,7 @@
   "title": "Colorful palette knife painting of a wolf head with amber eyes",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "wolf, wild animal, fur, forest, animal portrait, wildlife, predator, canine, spirit animal"
  },
  {
@@ -112,6 +362,7 @@
   "title": "Neon green video game controller graphic with circuit lines on black background",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "game controller, gamepad, video game, gaming, gamer, esports, console, joystick, play"
  },
  {
@@ -120,6 +371,7 @@
   "title": "Neon orange electric guitar graphic with circuit lines on black background",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "electric guitar, music, rock, band, instrument, concert, guitarist, rock and roll, strings"
  },
  {
@@ -128,6 +380,7 @@
   "title": "Neon purple rocket launch graphic with circuit lines on black background",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "rocket, launch, startup, space, spaceship, innovation, growth, boost, mission"
  },
  {
@@ -136,6 +389,7 @@
   "title": "Modern hotel bedroom with white beds and warm lighting",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "hotel room, bedroom, beds, hospitality, suite, accommodation, travel, interior design, cozy"
  },
  {
@@ -144,6 +398,7 @@
   "title": "Modern science laboratory with microscopes and glassware",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "laboratory, science, research, microscope, glassware, chemistry, biotech, medical lab, clean room"
  },
  {
@@ -152,6 +407,7 @@
   "title": "Old stone wine cellar with oak barrels and bottle racks",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "wine cellar, oak barrels, winery, vault, wine bottles, tasting, vineyard, stone cellar, cave"
  },
  {
@@ -160,6 +416,7 @@
   "title": "Rainy cyberpunk alley at night with pink and cyan neon lights",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "cyberpunk, neon alley, night city, rain, futuristic, wet street, sci-fi, urban, blade runner style"
  },
  {
@@ -168,6 +425,7 @@
   "title": "Abstract flowing liquid gradient waves in purple pink and orange",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "gradient, fluid, abstract waves, liquid, colorful, modern, vibrant, silky, 3d render"
  },
  {
@@ -176,6 +434,7 @@
   "title": "Dark green tropical monstera and palm leaves botanical background",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "tropical leaves, monstera, palm leaves, jungle, botanical, foliage, green, exotic, nature pattern"
  },
  {
@@ -184,6 +443,7 @@
   "title": "Colorful palette knife painting of a peacock with fanned tail",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "peacock, bird, tail feathers, exotic, elegant, plumage, animal, majestic, india"
  },
  {
@@ -192,6 +452,7 @@
   "title": "Neon yellow retro camera graphic with circuit lines on black background",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "camera, photography, photographer, lens, retro camera, photo, shutter, creative, media"
  },
  {
@@ -200,6 +461,7 @@
   "title": "White product display studio with geometric podiums",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "product display, podium, plinth, product backdrop, white studio, mockup, presentation, minimal, display stand"
  },
  {
@@ -208,6 +470,7 @@
   "title": "Empty pastel pink and white cosmetics store",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "cosmetics store, beauty shop, makeup, retail interior, pastel pink, boutique, store, beauty salon, retail design"
  },
  {
@@ -216,6 +479,7 @@
   "title": "Empty trade show exhibition hall with white booths",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "trade show, exhibition hall, expo, convention center, booth, event space, conference, business event, fair"
  },
  {
@@ -224,6 +488,7 @@
   "title": "Elegant white wedding hall with chandeliers and flower arch",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "wedding venue, ceremony, banquet hall, chandelier, white flowers, event space, celebration, reception, elegant"
  },
  {
@@ -232,6 +497,7 @@
   "title": "Modern white indoor swimming pool hall",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "indoor pool, swimming pool, spa, wellness, hotel pool, natatorium, water, leisure, resort"
  },
  {
@@ -240,6 +506,7 @@
   "title": "Bright modern office reception with white desk",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "office reception, lobby, front desk, corporate, business, modern office, workplace, entrance, interior"
  },
  {
@@ -248,6 +515,7 @@
   "title": "Bright modern library with curved white bookshelves",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "library, books, reading room, education, university, study, bookshelves, modern architecture, learning"
  },
  {
@@ -256,6 +524,7 @@
   "title": "Futuristic white medical bay with treatment pods",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "medical bay, sci-fi, futuristic hospital, healthcare, space station, science fiction, laboratory, future medicine, game environment"
  },
  {
@@ -264,6 +533,7 @@
   "title": "White gallery with iridescent pearlescent sculptures",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "iridescent, pearlescent, sculpture, gallery, holographic, pastel, art installation, exhibition, dreamy"
  },
  {
@@ -272,6 +542,7 @@
   "title": "Science fiction laboratory escape room",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "escape room, sci-fi laboratory, puzzle, game environment, mystery, futuristic, science fiction, adventure, lab"
  },
  {
@@ -280,6 +551,7 @@
   "title": "Empty retro american diner with pastel booths",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "retro diner, 1950s, restaurant, americana, booths, checkered floor, vintage, nostalgia, cafe"
  },
  {
@@ -288,6 +560,7 @@
   "title": "Moroccan style hall lit by hanging brass lanterns",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "ramadan, lanterns, moroccan, arches, mosaic, eid, iftar, middle eastern, festive"
  },
  {
@@ -296,6 +569,7 @@
   "title": "Empty pink podium with rose petals and paper hearts for Valentine's Day",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "valentine's day, podium, rose petals, hearts, pink, product display, romance, mockup, copy space"
  },
  {
@@ -304,6 +578,7 @@
   "title": "Warm golden Christmas string light bokeh on dark green background",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "christmas, bokeh, string lights, holiday, festive, warm light, background, winter, copy space"
  },
  {
@@ -312,6 +587,7 @@
   "title": "Colorful palette knife painting of a mountain goat with curved horns",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "goat, mountain goat, horns, year of the goat, lunar new year, animal portrait, wildlife, ibex, zodiac"
  },
  {
@@ -320,6 +596,7 @@
   "title": "Empty florist shop full of fresh flowers",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "florist, flower shop, flowers, bouquet, floral, small business, retail, botanical, spring"
  },
  {
@@ -328,6 +605,7 @@
   "title": "Empty minimal japanese noodle bar with wooden counter",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "noodle bar, ramen shop, japanese restaurant, wooden counter, minimal, asian cuisine, eatery, interior, dining"
  },
  {
@@ -336,6 +614,7 @@
   "title": "1950s pastel pink and mint bathroom",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "retro bathroom, 1950s, pastel, pink tiles, vintage, mid century, bathroom interior, nostalgia, kitsch"
  },
  {
@@ -344,6 +623,7 @@
   "title": "Empty rustic barn with hay bales",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "barn, rustic, farm, hay bales, countryside, wooden beams, agriculture, rural, sunlight"
  },
  {
@@ -352,6 +632,7 @@
   "title": "Thermal bath in an underground stone grotto",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "thermal bath, grotto, cave pool, spa, hot spring, wellness, luxury, relaxation, stone"
  },
  {
@@ -360,6 +641,7 @@
   "title": "Empty indoor basketball court",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "basketball court, sports hall, gym, indoor court, sport, arena, school gym, hoops, athletics"
  },
  {
@@ -368,6 +650,7 @@
   "title": "Surreal white room filled with pastel balls",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "ball pit, surreal, pastel, playful, fun, installation, colorful, dreamy, interactive"
  },
  {
@@ -376,6 +659,7 @@
   "title": "Futuristic liquid chrome lounge with iridescent reflections",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "chrome, liquid metal, iridescent, futuristic, y2k, reflective, lounge, holographic, sci-fi"
  },
  {
@@ -384,6 +668,7 @@
   "title": "Indoor japanese garden atrium with a koi pond",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "japanese garden, koi pond, zen, atrium, indoor garden, stepping stones, calm, nature, architecture"
  },
  {
@@ -392,6 +677,7 @@
   "title": "Steampunk airship cabin with brass pipes and portholes",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "steampunk, airship, zeppelin, brass, victorian, fantasy, adventure, cabin, game environment"
  },
  {
@@ -400,6 +686,7 @@
   "title": "Fantasy ice palace hall with a frozen throne",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "ice palace, frozen, fantasy, winter, snow queen, castle, throne, magical, game environment"
  },
  {
@@ -408,6 +695,7 @@
   "title": "Clean white biology lab with microscopes",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "laboratory, biology, research, microscopes, science, biotech, lab interior, medical research, education"
  },
  {
@@ -416,6 +704,7 @@
   "title": "Luxury vintage train dining car",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "vintage train, dining car, luxury travel, railway, orient, retro, travel, wood paneling, journey"
  },
  {
@@ -424,6 +713,7 @@
   "title": "Empty pastel podium with Easter eggs and tulips for spring product display",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "easter, easter eggs, spring, tulips, pastel, podium, product display, mockup, copy space"
  },
  {
@@ -432,6 +722,7 @@
   "title": "Empty sandstone podium on beach sand with seashells",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "summer, beach, sand, seashells, podium, product display, vacation, tropical, copy space"
  },
  {
@@ -440,6 +731,7 @@
   "title": "Empty dark stone podium with roasted coffee beans",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "coffee, coffee beans, cafe, roasted, podium, product display, mockup, brown, copy space"
  },
  {
@@ -448,6 +740,7 @@
   "title": "Empty wooden bathroom shelf for product display",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "bathroom shelf, product placement, mockup, spa, wellness, toiletries, wood, clean, copy space"
  },
  {
@@ -456,6 +749,7 @@
   "title": "Pink piggy bank with stacks of coins and a small plant",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "piggy bank, savings, money, coins, finance, budget, growth, investment concept, copy space"
  },
  {
@@ -464,6 +758,7 @@
   "title": "Top view of a healthy breakfast on white marble",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "breakfast, healthy food, yogurt bowl, berries, avocado toast, coffee, morning, brunch, flat lay"
  },
  {
@@ -472,6 +767,7 @@
   "title": "Cardboard moving boxes stacked in an empty bright apartment",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "moving day, moving boxes, relocation, new home, real estate, apartment, cardboard boxes, house move, empty room"
  },
  {
@@ -480,6 +776,7 @@
   "title": "Colorful palette knife painting of a shaggy highland cow",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "highland cow, cow, cattle, farm animal, scottish, horns, shaggy, rustic, animal portrait"
  },
  {
@@ -488,6 +785,7 @@
   "title": "Colorful palette knife painting of a sea turtle swimming",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "sea turtle, turtle, ocean, marine life, underwater, sea, wildlife, reef, nature"
  },
  {
@@ -496,6 +794,7 @@
   "title": "Colorful palette knife painting of a cheetah looking at the viewer",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "cheetah, big cat, spots, africa, safari, wildlife, predator, animal portrait, fast"
  },
  {
@@ -504,6 +803,7 @@
   "title": "Colorful palette knife painting of a hedgehog in autumn leaves",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "hedgehog, cute animal, autumn, leaves, woodland, wildlife, small animal, nature, forest"
  },
  {
@@ -512,6 +812,7 @@
   "title": "Colorful palette knife painting of a red-eyed tree frog on a leaf",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "tree frog, frog, red-eyed, amphibian, rainforest, tropical, wildlife, jungle, exotic"
  },
  {
@@ -520,6 +821,7 @@
   "title": "Colorful palette knife painting of a smiling sloth hanging from a branch",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "sloth, cute animal, rainforest, slow, relax, wildlife, jungle, funny animal, tropical"
  },
  {
@@ -528,6 +830,7 @@
   "title": "Colorful palette knife painting of a happy golden retriever",
   "note": "",
   "ai": true,
+  "pano": false,
   "words": "golden retriever, dog, pet portrait, puppy, dog lover, happy dog, pet, canine, family dog"
  },
  {
@@ -536,6 +839,7 @@
   "title": "Empty indoor market hall with wooden stalls",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "market hall, food market, stalls, indoor market, iron roof, european, shopping, architecture, empty"
  },
  {
@@ -544,6 +848,7 @@
   "title": "Medieval monastery scriptorium",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "scriptorium, monastery, medieval, manuscripts, library, stone vault, candles, history, monks"
  },
  {
@@ -552,6 +857,7 @@
   "title": "Empty craft brewery with copper tanks",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "brewery, craft beer, copper tanks, brewing, industrial, barrels, production, beer making, factory"
  },
  {
@@ -560,6 +866,7 @@
   "title": "Underwater aquarium tunnel with fish overhead",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "aquarium, underwater tunnel, fish, marine life, ocean, sea life, blue, rays, attraction"
  },
  {
@@ -568,6 +875,7 @@
   "title": "Futuristic virtual reality arcade with white play pods",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "virtual reality, vr arcade, gaming, futuristic, entertainment, technology, metaverse, play area, esports"
  },
  {
@@ -576,6 +884,7 @@
   "title": "Empty boxing gym with a ring and heavy bags",
   "note": "",
   "ai": true,
+  "pano": true,
   "words": "boxing gym, boxing ring, fitness, combat sport, punching bags, training, gym, sport, gritty"
  }
 ]

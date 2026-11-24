@@ -9,9 +9,10 @@ import csv
 import glob
 import json
 import re
+import shutil
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 FOUNDRY = Path("E:/Development/TemplateFoundry")
@@ -20,6 +21,12 @@ MOTION = Path("E:/Development/MotionLibrary/stage/review/p13_b.jpg")
 IMG = ROOT / "public" / "v2" / "img"
 IMG.mkdir(parents=True, exist_ok=True)
 W, H = 800, 500
+# Look-around copies of the 360 scenes for the viewer: smaller than the file that is sold, and marked.
+PANO = ROOT / "public" / "v2" / "pano"
+PANO.mkdir(parents=True, exist_ok=True)
+PW, PH = 3072, 1536
+DEMO = ROOT / "public" / "v2" / "demo"
+DEMO.mkdir(parents=True, exist_ok=True)
 # Only the templates cleared to show.
 TEMPLATES = ["orbit", "flightdeck", "confetti"]
 # Always on the shelf: the pieces the home page shows by name.
@@ -39,6 +46,28 @@ def fit(im, pano=False):
     return im.crop((x, y, x + W, y + H))
 
 
+def mark():
+    """A faint repeated name, the way a stock preview is marked. Drawn once, laid over every scene."""
+    layer = Image.new("RGBA", (PW, PH), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    try:
+        face = ImageFont.truetype("C:/Windows/Fonts/arialbd.ttf", 34)
+    except OSError:
+        face = ImageFont.load_default()
+    for row, y in enumerate(range(150, PH - 120, 210)):
+        for x in range(-200 + (row % 2) * 260, PW, 520):
+            d.text((x, y), "GLASS HOUR  PREVIEW", font=face, fill=(255, 255, 255, 21))
+    return layer
+
+
+MARK = mark()
+
+
+def pano_copy(im, dest):
+    im = im.convert("RGB").resize((PW, PH), Image.LANCZOS).convert("RGBA")
+    Image.alpha_composite(im, MARK).convert("RGB").save(dest, quality=78, optimize=True, progressive=True)
+
+
 def tidy(title):
     t = re.sub(r"^360 degree equirectangular panorama of (an? |the )?", "", title.strip(), flags=re.I)
     t = re.sub(r"^Fictional 360 equirectangular ", "", t, flags=re.I)
@@ -52,8 +81,19 @@ for t in cat["templates"]:
     if t["slug"] not in TEMPLATES:
         continue
     fit(Image.open(FOUNDRY / "storefront" / "thumbs" / f"{t['slug']}.jpg")).save(IMG / f"t-{t['slug']}.jpg", quality=82, optimize=True)
-    items.append({"id": f"t-{t['slug']}", "kind": "template", "title": t["name"], "note": t["tagline"], "pages": t.get("pages"), "ai": False,
-                  "words": " ".join(t.get("tags") or [])})
+    # The template itself, as built for its demo, so the site can run it in a live preview.
+    src, dest = FOUNDRY / "storefront" / "demo" / t["slug"], DEMO / t["slug"]
+    shutil.rmtree(dest, ignore_errors=True)
+    shutil.copytree(src, dest)
+    pages = []
+    for f in sorted(dest.glob("*.html"), key=lambda p: (p.name != "index.html", p.name != "home-2.html", p.name)):
+        if f.name == "404.html":
+            continue
+        m = re.search(r"<title>(.*?)</title>", f.read_text(encoding="utf-8", errors="replace"), re.S)
+        name = "Home" if f.name == "index.html" else "Home, second design" if f.name == "home-2.html" else f.stem.replace("-", " ").capitalize()
+        pages.append({"file": f.name, "name": name, "title": (m.group(1).strip() if m else name)})
+    items.append({"id": f"t-{t['slug']}", "kind": "template", "title": t["name"], "note": t["tagline"], "pages": len(pages), "ai": False,
+                  "words": " ".join(t.get("tags") or []), "demo": {"slug": t["slug"], "pages": pages}})
 
 for batch, step in BATCHES.items():
     folder = STOCK / f"pilot_batch_{batch}"
@@ -71,8 +111,10 @@ for batch, step in BATCHES.items():
         kind = "scene" if pano else "graphic" if re.search(r"neon|icon|logo|pattern|background|podium|display", row["Title"], re.I) else "art"
         iid = "s-" + Path(row["Filename"]).stem.replace("stockpilot", "")
         fit(im, pano).save(IMG / f"{iid}.jpg", quality=80, optimize=True)
+        if pano:
+            pano_copy(im, PANO / f"{iid}.jpg")
         words = ", ".join(k.strip() for k in row["Keywords"].split(",")[:9])
-        items.append({"id": iid, "kind": kind, "title": tidy(row["Title"]), "note": "", "ai": True, "words": words})
+        items.append({"id": iid, "kind": kind, "title": tidy(row["Title"]), "note": "", "ai": True, "pano": pano, "words": words})
 
 if MOTION.exists():
     m = Image.open(MOTION)
@@ -84,6 +126,8 @@ kinds = {}
 for i in items:
     kinds[i["kind"]] = kinds.get(i["kind"], 0) + 1
 size = sum(f.stat().st_size for f in IMG.glob("*.jpg")) // 1024
+psize = sum(f.stat().st_size for f in PANO.glob("*.jpg")) // 1024
+print(f"{len(list(PANO.glob('*.jpg')))} look-around copies, {psize} KB in {PANO}")
 print(len(items), kinds, f"{size} KB in {IMG}")
 for i in items[:3] + items[-4:]:
     print(" ", i["id"], "|", i["kind"], "|", i["title"])

@@ -24,6 +24,10 @@ if not os.path.isdir(DIST):
 
 pages = []
 for root, _, files in os.walk(DIST):
+    # The website templates run in the live preview are whole sites of their own, with their own gate where they
+    # are made (Template Foundry). They are not pages of this site.
+    if os.path.relpath(root, DIST).replace(os.sep, "/").startswith("v2/demo"):
+        continue
     for f in files:
         if f.endswith(".html"):
             pages.append(os.path.join(root, f))
