@@ -1,0 +1,581 @@
+[
+ {
+  "id": "t-confetti",
+  "kind": "template",
+  "title": "Confetti",
+  "note": "Sixteen pages for a service business that sells by the event, with two home page designs.",
+  "pages": 16,
+  "ai": false,
+  "words": "events weddings service multi-page light HTML"
+ },
+ {
+  "id": "t-flightdeck",
+  "kind": "template",
+  "title": "Flight Deck",
+  "note": "A portfolio that behaves like a control console, with a shareable page for every project.",
+  "pages": 22,
+  "ai": false,
+  "words": "portfolio agency studio app-like dark HTML"
+ },
+ {
+  "id": "t-orbit",
+  "kind": "template",
+  "title": "Orbit",
+  "note": "A star map hero with three orbiting chapters of the show, written from scratch.",
+  "pages": 9,
+  "ai": false,
+  "words": "band show theatre concert dark HTML"
+ },
+ {
+  "id": "s-006_001",
+  "kind": "scene",
+  "title": "Empty supermarket interior with stocked aisles",
+  "note": "",
+  "ai": true,
+  "words": "supermarket, grocery store, retail, aisle, shelves, shopping, store interior, convenience store, market"
+ },
+ {
+  "id": "s-006_005",
+  "kind": "scene",
+  "title": "Empty modern open plan office interior",
+  "note": "",
+  "ai": true,
+  "words": "office, workplace, open plan, desks, corporate, business, coworking, workspace, computers"
+ },
+ {
+  "id": "s-006_009",
+  "kind": "scene",
+  "title": "Photography studio with softbox lights and white cyclorama",
+  "note": "",
+  "ai": true,
+  "words": "photo studio, softbox, studio lighting, cyclorama, photography, white backdrop, product lighting, film set, studio hdri"
+ },
+ {
+  "id": "s-006_013",
+  "kind": "scene",
+  "title": "Empty airport terminal departure gate at sunrise",
+  "note": "",
+  "ai": true,
+  "words": "airport, terminal, departure gate, travel, waiting area, aviation, transportation hub, seats, runway view"
+ },
+ {
+  "id": "s-006_017",
+  "kind": "scene",
+  "title": "Data center server room with rows of racks",
+  "note": "",
+  "ai": true,
+  "words": "server room, data center, cloud computing, racks, network, technology, hosting, cyber, it infrastructure"
+ },
+ {
+  "id": "s-006_021",
+  "kind": "scene",
+  "title": "Alpine meadow and mountain lake under blue sky",
+  "note": "",
+  "ai": true,
+  "words": "mountains, alpine meadow, lake, wildflowers, snow peaks, nature, landscape, hiking, outdoors"
+ },
+ {
+  "id": "s-006_025",
+  "kind": "scene",
+  "title": "Green grass field under blue sky with clouds",
+  "note": "",
+  "ai": true,
+  "words": "grass field, blue sky, clouds, meadow, sunny day, countryside, outdoor lighting, summer, horizon"
+ },
+ {
+  "id": "s-006_026",
+  "kind": "scene",
+  "title": "Alien planet landscape with rock spires and two moons",
+  "note": "",
+  "ai": true,
+  "words": "alien planet, science fiction, extraterrestrial, fantasy landscape, space, moons, otherworldly, sci-fi world, exoplanet"
+ },
+ {
+  "id": "s-006_029",
+  "kind": "art",
+  "title": "Colorful palette knife painting of an owl with golden eyes",
+  "note": "",
+  "ai": true,
+  "words": "owl, bird, feathers, wisdom, night bird, animal portrait, wildlife, nocturnal, raptor"
+ },
+ {
+  "id": "s-006_031",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a wolf head with amber eyes",
+  "note": "",
+  "ai": true,
+  "words": "wolf, wild animal, fur, forest, animal portrait, wildlife, predator, canine, spirit animal"
+ },
+ {
+  "id": "s-006_033",
+  "kind": "graphic",
+  "title": "Neon green video game controller graphic with circuit lines on black background",
+  "note": "",
+  "ai": true,
+  "words": "game controller, gamepad, video game, gaming, gamer, esports, console, joystick, play"
+ },
+ {
+  "id": "s-006_036",
+  "kind": "graphic",
+  "title": "Neon orange electric guitar graphic with circuit lines on black background",
+  "note": "",
+  "ai": true,
+  "words": "electric guitar, music, rock, band, instrument, concert, guitarist, rock and roll, strings"
+ },
+ {
+  "id": "s-006_037",
+  "kind": "graphic",
+  "title": "Neon purple rocket launch graphic with circuit lines on black background",
+  "note": "",
+  "ai": true,
+  "words": "rocket, launch, startup, space, spaceship, innovation, growth, boost, mission"
+ },
+ {
+  "id": "s-007_001",
+  "kind": "scene",
+  "title": "Modern hotel bedroom with white beds and warm lighting",
+  "note": "",
+  "ai": true,
+  "words": "hotel room, bedroom, beds, hospitality, suite, accommodation, travel, interior design, cozy"
+ },
+ {
+  "id": "s-007_006",
+  "kind": "scene",
+  "title": "Modern science laboratory with microscopes and glassware",
+  "note": "",
+  "ai": true,
+  "words": "laboratory, science, research, microscope, glassware, chemistry, biotech, medical lab, clean room"
+ },
+ {
+  "id": "s-007_011",
+  "kind": "scene",
+  "title": "Old stone wine cellar with oak barrels and bottle racks",
+  "note": "",
+  "ai": true,
+  "words": "wine cellar, oak barrels, winery, vault, wine bottles, tasting, vineyard, stone cellar, cave"
+ },
+ {
+  "id": "s-007_016",
+  "kind": "scene",
+  "title": "Rainy cyberpunk alley at night with pink and cyan neon lights",
+  "note": "",
+  "ai": true,
+  "words": "cyberpunk, neon alley, night city, rain, futuristic, wet street, sci-fi, urban, blade runner style"
+ },
+ {
+  "id": "s-007_021",
+  "kind": "art",
+  "title": "Abstract flowing liquid gradient waves in purple pink and orange",
+  "note": "",
+  "ai": true,
+  "words": "gradient, fluid, abstract waves, liquid, colorful, modern, vibrant, silky, 3d render"
+ },
+ {
+  "id": "s-007_026",
+  "kind": "graphic",
+  "title": "Dark green tropical monstera and palm leaves botanical background",
+  "note": "",
+  "ai": true,
+  "words": "tropical leaves, monstera, palm leaves, jungle, botanical, foliage, green, exotic, nature pattern"
+ },
+ {
+  "id": "s-007_031",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a peacock with fanned tail",
+  "note": "",
+  "ai": true,
+  "words": "peacock, bird, tail feathers, exotic, elegant, plumage, animal, majestic, india"
+ },
+ {
+  "id": "s-007_036",
+  "kind": "graphic",
+  "title": "Neon yellow retro camera graphic with circuit lines on black background",
+  "note": "",
+  "ai": true,
+  "words": "camera, photography, photographer, lens, retro camera, photo, shutter, creative, media"
+ },
+ {
+  "id": "s-009_001",
+  "kind": "scene",
+  "title": "White product display studio with geometric podiums",
+  "note": "",
+  "ai": true,
+  "words": "product display, podium, plinth, product backdrop, white studio, mockup, presentation, minimal, display stand"
+ },
+ {
+  "id": "s-009_006",
+  "kind": "scene",
+  "title": "Empty pastel pink and white cosmetics store",
+  "note": "",
+  "ai": true,
+  "words": "cosmetics store, beauty shop, makeup, retail interior, pastel pink, boutique, store, beauty salon, retail design"
+ },
+ {
+  "id": "s-009_012",
+  "kind": "scene",
+  "title": "Empty trade show exhibition hall with white booths",
+  "note": "",
+  "ai": true,
+  "words": "trade show, exhibition hall, expo, convention center, booth, event space, conference, business event, fair"
+ },
+ {
+  "id": "s-009_017",
+  "kind": "scene",
+  "title": "Elegant white wedding hall with chandeliers and flower arch",
+  "note": "",
+  "ai": true,
+  "words": "wedding venue, ceremony, banquet hall, chandelier, white flowers, event space, celebration, reception, elegant"
+ },
+ {
+  "id": "s-009_022",
+  "kind": "scene",
+  "title": "Modern white indoor swimming pool hall",
+  "note": "",
+  "ai": true,
+  "words": "indoor pool, swimming pool, spa, wellness, hotel pool, natatorium, water, leisure, resort"
+ },
+ {
+  "id": "s-009_027",
+  "kind": "scene",
+  "title": "Bright modern office reception with white desk",
+  "note": "",
+  "ai": true,
+  "words": "office reception, lobby, front desk, corporate, business, modern office, workplace, entrance, interior"
+ },
+ {
+  "id": "s-009_032",
+  "kind": "scene",
+  "title": "Bright modern library with curved white bookshelves",
+  "note": "",
+  "ai": true,
+  "words": "library, books, reading room, education, university, study, bookshelves, modern architecture, learning"
+ },
+ {
+  "id": "s-009_037",
+  "kind": "scene",
+  "title": "Futuristic white medical bay with treatment pods",
+  "note": "",
+  "ai": true,
+  "words": "medical bay, sci-fi, futuristic hospital, healthcare, space station, science fiction, laboratory, future medicine, game environment"
+ },
+ {
+  "id": "s-010_001",
+  "kind": "scene",
+  "title": "White gallery with iridescent pearlescent sculptures",
+  "note": "",
+  "ai": true,
+  "words": "iridescent, pearlescent, sculpture, gallery, holographic, pastel, art installation, exhibition, dreamy"
+ },
+ {
+  "id": "s-010_006",
+  "kind": "scene",
+  "title": "Science fiction laboratory escape room",
+  "note": "",
+  "ai": true,
+  "words": "escape room, sci-fi laboratory, puzzle, game environment, mystery, futuristic, science fiction, adventure, lab"
+ },
+ {
+  "id": "s-010_011",
+  "kind": "scene",
+  "title": "Empty retro american diner with pastel booths",
+  "note": "",
+  "ai": true,
+  "words": "retro diner, 1950s, restaurant, americana, booths, checkered floor, vintage, nostalgia, cafe"
+ },
+ {
+  "id": "s-010_016",
+  "kind": "scene",
+  "title": "Moroccan style hall lit by hanging brass lanterns",
+  "note": "",
+  "ai": true,
+  "words": "ramadan, lanterns, moroccan, arches, mosaic, eid, iftar, middle eastern, festive"
+ },
+ {
+  "id": "s-010_021",
+  "kind": "graphic",
+  "title": "Empty pink podium with rose petals and paper hearts for Valentine's Day",
+  "note": "",
+  "ai": true,
+  "words": "valentine's day, podium, rose petals, hearts, pink, product display, romance, mockup, copy space"
+ },
+ {
+  "id": "s-010_026",
+  "kind": "graphic",
+  "title": "Warm golden Christmas string light bokeh on dark green background",
+  "note": "",
+  "ai": true,
+  "words": "christmas, bokeh, string lights, holiday, festive, warm light, background, winter, copy space"
+ },
+ {
+  "id": "s-010_031",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a mountain goat with curved horns",
+  "note": "",
+  "ai": true,
+  "words": "goat, mountain goat, horns, year of the goat, lunar new year, animal portrait, wildlife, ibex, zodiac"
+ },
+ {
+  "id": "s-011_001",
+  "kind": "scene",
+  "title": "Empty florist shop full of fresh flowers",
+  "note": "",
+  "ai": true,
+  "words": "florist, flower shop, flowers, bouquet, floral, small business, retail, botanical, spring"
+ },
+ {
+  "id": "s-011_005",
+  "kind": "scene",
+  "title": "Empty minimal japanese noodle bar with wooden counter",
+  "note": "",
+  "ai": true,
+  "words": "noodle bar, ramen shop, japanese restaurant, wooden counter, minimal, asian cuisine, eatery, interior, dining"
+ },
+ {
+  "id": "s-011_009",
+  "kind": "scene",
+  "title": "1950s pastel pink and mint bathroom",
+  "note": "",
+  "ai": true,
+  "words": "retro bathroom, 1950s, pastel, pink tiles, vintage, mid century, bathroom interior, nostalgia, kitsch"
+ },
+ {
+  "id": "s-011_013",
+  "kind": "scene",
+  "title": "Empty rustic barn with hay bales",
+  "note": "",
+  "ai": true,
+  "words": "barn, rustic, farm, hay bales, countryside, wooden beams, agriculture, rural, sunlight"
+ },
+ {
+  "id": "s-011_016",
+  "kind": "scene",
+  "title": "Thermal bath in an underground stone grotto",
+  "note": "",
+  "ai": true,
+  "words": "thermal bath, grotto, cave pool, spa, hot spring, wellness, luxury, relaxation, stone"
+ },
+ {
+  "id": "s-011_017",
+  "kind": "scene",
+  "title": "Empty indoor basketball court",
+  "note": "",
+  "ai": true,
+  "words": "basketball court, sports hall, gym, indoor court, sport, arena, school gym, hoops, athletics"
+ },
+ {
+  "id": "s-011_021",
+  "kind": "scene",
+  "title": "Surreal white room filled with pastel balls",
+  "note": "",
+  "ai": true,
+  "words": "ball pit, surreal, pastel, playful, fun, installation, colorful, dreamy, interactive"
+ },
+ {
+  "id": "s-011_025",
+  "kind": "scene",
+  "title": "Futuristic liquid chrome lounge with iridescent reflections",
+  "note": "",
+  "ai": true,
+  "words": "chrome, liquid metal, iridescent, futuristic, y2k, reflective, lounge, holographic, sci-fi"
+ },
+ {
+  "id": "s-011_026",
+  "kind": "scene",
+  "title": "Indoor japanese garden atrium with a koi pond",
+  "note": "",
+  "ai": true,
+  "words": "japanese garden, koi pond, zen, atrium, indoor garden, stepping stones, calm, nature, architecture"
+ },
+ {
+  "id": "s-011_029",
+  "kind": "scene",
+  "title": "Steampunk airship cabin with brass pipes and portholes",
+  "note": "",
+  "ai": true,
+  "words": "steampunk, airship, zeppelin, brass, victorian, fantasy, adventure, cabin, game environment"
+ },
+ {
+  "id": "s-011_031",
+  "kind": "scene",
+  "title": "Fantasy ice palace hall with a frozen throne",
+  "note": "",
+  "ai": true,
+  "words": "ice palace, frozen, fantasy, winter, snow queen, castle, throne, magical, game environment"
+ },
+ {
+  "id": "s-011_033",
+  "kind": "scene",
+  "title": "Clean white biology lab with microscopes",
+  "note": "",
+  "ai": true,
+  "words": "laboratory, biology, research, microscopes, science, biotech, lab interior, medical research, education"
+ },
+ {
+  "id": "s-011_037",
+  "kind": "scene",
+  "title": "Luxury vintage train dining car",
+  "note": "",
+  "ai": true,
+  "words": "vintage train, dining car, luxury travel, railway, orient, retro, travel, wood paneling, journey"
+ },
+ {
+  "id": "s-012_001",
+  "kind": "graphic",
+  "title": "Empty pastel podium with Easter eggs and tulips for spring product display",
+  "note": "",
+  "ai": true,
+  "words": "easter, easter eggs, spring, tulips, pastel, podium, product display, mockup, copy space"
+ },
+ {
+  "id": "s-012_006",
+  "kind": "graphic",
+  "title": "Empty sandstone podium on beach sand with seashells",
+  "note": "",
+  "ai": true,
+  "words": "summer, beach, sand, seashells, podium, product display, vacation, tropical, copy space"
+ },
+ {
+  "id": "s-012_011",
+  "kind": "graphic",
+  "title": "Empty dark stone podium with roasted coffee beans",
+  "note": "",
+  "ai": true,
+  "words": "coffee, coffee beans, cafe, roasted, podium, product display, mockup, brown, copy space"
+ },
+ {
+  "id": "s-012_016",
+  "kind": "graphic",
+  "title": "Empty wooden bathroom shelf for product display",
+  "note": "",
+  "ai": true,
+  "words": "bathroom shelf, product placement, mockup, spa, wellness, toiletries, wood, clean, copy space"
+ },
+ {
+  "id": "s-012_021",
+  "kind": "art",
+  "title": "Pink piggy bank with stacks of coins and a small plant",
+  "note": "",
+  "ai": true,
+  "words": "piggy bank, savings, money, coins, finance, budget, growth, investment concept, copy space"
+ },
+ {
+  "id": "s-012_027",
+  "kind": "art",
+  "title": "Top view of a healthy breakfast on white marble",
+  "note": "",
+  "ai": true,
+  "words": "breakfast, healthy food, yogurt bowl, berries, avocado toast, coffee, morning, brunch, flat lay"
+ },
+ {
+  "id": "s-012_033",
+  "kind": "art",
+  "title": "Cardboard moving boxes stacked in an empty bright apartment",
+  "note": "",
+  "ai": true,
+  "words": "moving day, moving boxes, relocation, new home, real estate, apartment, cardboard boxes, house move, empty room"
+ },
+ {
+  "id": "s-013_001",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a shaggy highland cow",
+  "note": "",
+  "ai": true,
+  "words": "highland cow, cow, cattle, farm animal, scottish, horns, shaggy, rustic, animal portrait"
+ },
+ {
+  "id": "s-013_003",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a sea turtle swimming",
+  "note": "",
+  "ai": true,
+  "words": "sea turtle, turtle, ocean, marine life, underwater, sea, wildlife, reef, nature"
+ },
+ {
+  "id": "s-013_005",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a cheetah looking at the viewer",
+  "note": "",
+  "ai": true,
+  "words": "cheetah, big cat, spots, africa, safari, wildlife, predator, animal portrait, fast"
+ },
+ {
+  "id": "s-013_007",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a hedgehog in autumn leaves",
+  "note": "",
+  "ai": true,
+  "words": "hedgehog, cute animal, autumn, leaves, woodland, wildlife, small animal, nature, forest"
+ },
+ {
+  "id": "s-013_009",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a red-eyed tree frog on a leaf",
+  "note": "",
+  "ai": true,
+  "words": "tree frog, frog, red-eyed, amphibian, rainforest, tropical, wildlife, jungle, exotic"
+ },
+ {
+  "id": "s-013_011",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a smiling sloth hanging from a branch",
+  "note": "",
+  "ai": true,
+  "words": "sloth, cute animal, rainforest, slow, relax, wildlife, jungle, funny animal, tropical"
+ },
+ {
+  "id": "s-013_013",
+  "kind": "art",
+  "title": "Colorful palette knife painting of a happy golden retriever",
+  "note": "",
+  "ai": true,
+  "words": "golden retriever, dog, pet portrait, puppy, dog lover, happy dog, pet, canine, family dog"
+ },
+ {
+  "id": "s-013_015",
+  "kind": "scene",
+  "title": "Empty indoor market hall with wooden stalls",
+  "note": "",
+  "ai": true,
+  "words": "market hall, food market, stalls, indoor market, iron roof, european, shopping, architecture, empty"
+ },
+ {
+  "id": "s-013_017",
+  "kind": "scene",
+  "title": "Medieval monastery scriptorium",
+  "note": "",
+  "ai": true,
+  "words": "scriptorium, monastery, medieval, manuscripts, library, stone vault, candles, history, monks"
+ },
+ {
+  "id": "s-013_019",
+  "kind": "scene",
+  "title": "Empty craft brewery with copper tanks",
+  "note": "",
+  "ai": true,
+  "words": "brewery, craft beer, copper tanks, brewing, industrial, barrels, production, beer making, factory"
+ },
+ {
+  "id": "s-013_021",
+  "kind": "scene",
+  "title": "Underwater aquarium tunnel with fish overhead",
+  "note": "",
+  "ai": true,
+  "words": "aquarium, underwater tunnel, fish, marine life, ocean, sea life, blue, rays, attraction"
+ },
+ {
+  "id": "s-013_023",
+  "kind": "scene",
+  "title": "Futuristic virtual reality arcade with white play pods",
+  "note": "",
+  "ai": true,
+  "words": "virtual reality, vr arcade, gaming, futuristic, entertainment, technology, metaverse, play area, esports"
+ },
+ {
+  "id": "s-013_025",
+  "kind": "scene",
+  "title": "Empty boxing gym with a ring and heavy bags",
+  "note": "",
+  "ai": true,
+  "words": "boxing gym, boxing ring, fitness, combat sport, punching bags, training, gym, sport, gritty"
+ }
+]

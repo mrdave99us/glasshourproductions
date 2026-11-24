@@ -33,7 +33,9 @@ for p in pages:
     html = open(p, encoding="utf-8").read()
     if any(d in html for d in DASHES):
         fail(f"{rel}: em/en dash present")
-    m = PLACEHOLDER.search(re.sub(r"<script[^>]*>.*?</script>", "", html, flags=re.S))
+    # The name of a form field's hint attribute is not a tell; what the hint says is still read.
+    seen = re.sub(r'\splaceholder(?==")', " hint", re.sub(r"<script[^>]*>.*?</script>", "", html, flags=re.S))
+    m = PLACEHOLDER.search(seen)
     if m:
         fail(f"{rel}: placeholder tell {m.group(0)!r}")
     for attr, url in re.findall(r'\b(href|src)="([^"]+)"', html):
