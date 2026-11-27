@@ -3,9 +3,10 @@
 NOTHING GOES UP UNLESS IT IS PICKED. The owner hand-picks what is shown: tools/shelf_picks.json lists the ids that
 are on the shelf, and only those are copied into the site. With an empty list the shelf is empty.
 
-  python tools/v2_items.py               builds the shelf from the picks (pictures, 360 copies, template demos)
-  python tools/v2_items.py --candidates  writes a pick page of everything that COULD go up, outside the site:
-                                         E:/Development/GlassHourPicks/index.html (tick, copy, hand the list over)
+  python tools/v2_items.py   builds the shelf from the picks (pictures, template demos)
+
+There is no pick page (David, Nov 27 2026: "lose the pick page altogether, ill pick them myself"). He names what
+goes up; only then do its ids go into shelf_picks.json.
 
 Copies, never links: every picked picture is resized into public/v2/img and the list is written to
 src/v2/items.json. Candidates are the templates cleared to show, every 360 scene in the stock batches, and the
@@ -25,7 +26,6 @@ ROOT = Path(__file__).resolve().parent.parent
 FOUNDRY = Path("E:/Development/TemplateFoundry")
 STOCK = Path("E:/Development/asetbaseAI/adobe_stock_ops")
 PICKS = ROOT / "tools" / "shelf_picks.json"
-PICK_PAGE = Path("E:/Development/GlassHourPicks")
 IMG = ROOT / "public" / "v2" / "img"
 PANO = ROOT / "public" / "v2" / "pano"
 DEMO = ROOT / "public" / "v2" / "demo"
@@ -131,59 +131,6 @@ def candidates():
     return out
 
 
-def pick_page(cands):
-    """One page, outside the website, of every candidate with a tick box. It writes nothing: the owner copies the
-    list of ticked ids and hands it over, and it goes into tools/shelf_picks.json."""
-    thumbs = PICK_PAGE / "t"
-    thumbs.mkdir(parents=True, exist_ok=True)
-    picked = set(json.load(open(PICKS, encoding="utf-8"))["items"])
-    sections = [("Website templates", [c for c in cands if c["kind"] == "template"])]
-    sections += [(f"Web graphics: {GROUP_NAME[g]}", [c for c in cands if c.get("group") == g]) for g in GROUP_NAME]
-    for c in cands:
-        dest = thumbs / f"{c['id']}.jpg"
-        if not dest.exists():
-            fit(Image.open(c["src"]), c.get("pano", False), (480, 300)).save(dest, quality=78)
-
-    def esc(s):
-        return str(s).replace("&", "&amp;").replace("<", "&lt;").replace('"', "&quot;")
-
-    body = "".join(
-        f'<section><h2>{esc(name)} <small>{len(items)}</small> <button type="button" class="all">Tick all</button> <button type="button" class="none">Untick all</button></h2><div class="g">'
-        + "".join(f'<label><input type="checkbox" value="{c["id"]}"{" checked" if c["id"] in picked else ""}><img src="t/{c["id"]}.jpg" loading="lazy" alt=""><span>{esc(c["title"])}</span></label>' for c in items)
-        + "</div></section>" for name, items in sections if items)
-    html = f"""<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Glass Hour: pick what goes on the shelf</title>
-<style>
-body{{margin:0;background:#0d0e10;color:#f4f1ea;font:15px/1.4 system-ui,sans-serif}}
-header{{position:sticky;top:0;z-index:2;display:flex;gap:16px;align-items:center;padding:14px 22px;background:#16181c;border-bottom:1px solid #24272d}}
-header b{{font-size:18px}} header span{{color:#a9a59c;margin-right:auto}}
-button{{font:inherit;cursor:pointer;border:0;border-radius:999px;padding:9px 16px;background:#24272d;color:#f4f1ea}} #copy{{background:#ffb53e;color:#17110a;font-weight:600}}
-main{{padding:8px 22px 80px}} h2{{font-size:20px;margin:28px 0 12px}} h2 small{{color:#a9a59c;font-weight:400}} h2 button{{font-size:12px;padding:5px 11px;margin-left:8px}}
-.g{{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}}
-label{{position:relative;display:block;border-radius:10px;overflow:hidden;background:#16181c;border:2px solid transparent;cursor:pointer}}
-label:has(:checked){{border-color:#ffb53e}} label img{{display:block;width:100%;aspect-ratio:16/10;object-fit:cover}}
-label span{{display:block;padding:7px 9px 9px;font-size:12.5px;color:#cfcbc2}} label input{{position:absolute;left:8px;top:8px;width:20px;height:20px;accent-color:#ffb53e}}
-</style>
-<header><b>Pick what goes on the shelf</b><span id="n"></span><button id="copy">Copy my picks</button></header>
-<main><p style="color:#a9a59c;max-width:60em">Tick what you want on the website. Nothing changes until you press Copy my picks and give the list to Claude. Ticks are remembered on this computer.</p>{body}</main>
-<script>
-const boxes = [...document.querySelectorAll('input[type=checkbox]')], n = document.getElementById('n'), KEY = 'gh-picks'
-try {{ const saved = JSON.parse(localStorage.getItem(KEY)); if (Array.isArray(saved)) for (const b of boxes) b.checked = saved.includes(b.value) }} catch (e) {{}}
-const picks = () => boxes.filter(b => b.checked).map(b => b.value)
-const count = () => {{ const p = picks(); n.textContent = p.length + ' of ' + boxes.length + ' ticked'; localStorage.setItem(KEY, JSON.stringify(p)) }}
-document.addEventListener('change', count)
-for (const s of document.querySelectorAll('section')) {{
-  s.querySelector('.all').onclick = () => {{ s.querySelectorAll('input').forEach(b => b.checked = true); count() }}
-  s.querySelector('.none').onclick = () => {{ s.querySelectorAll('input').forEach(b => b.checked = false); count() }}
-}}
-document.getElementById('copy').onclick = async e => {{ const t = 'Shelf picks: ' + picks().join(' '); try {{ await navigator.clipboard.writeText(t); e.target.textContent = 'Copied. Paste it to Claude.' }} catch (x) {{ prompt('Copy this and give it to Claude:', t) }} }}
-count()
-</script>"""
-    (PICK_PAGE / "index.html").write_text(html, encoding="utf-8")
-    print(f"{len(cands)} candidates -> {PICK_PAGE / 'index.html'}")
-    for name, items in sections:
-        print(f"  {name}: {len(items)}")
-
-
 def build(cands):
     picked = set(json.load(open(PICKS, encoding="utf-8"))["items"])
     unknown = picked - {c["id"] for c in cands}
@@ -240,4 +187,4 @@ if __name__ == "__main__":
     if not PICKS.exists():
         PICKS.write_text('{\n  "_note": "The ids that are on the shelf. Hand-picked by the owner; nothing else goes up.",\n  "items": []\n}\n', encoding="utf-8")
     c = candidates()
-    pick_page(c) if "--candidates" in sys.argv else build(c)
+    build(c)
