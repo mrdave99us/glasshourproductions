@@ -24,6 +24,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .menu a:hover, .side a:hover, .menu a[aria-current] { opacity: 1; }
 .menu a[aria-current] { color: var(--sand); }
 .side { display: flex; align-items: center; gap: 1.5em; white-space: nowrap; }
+.signin { display: inline-block; padding: .56em 1.1em; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--ink) 28%, transparent); opacity: 1 !important; transition: border-color var(--t1) ease, color var(--t1) ease; }
+.signin:hover, .signin[aria-current] { border-color: var(--sand); color: var(--sand); }
 .pill { display: inline-block; padding: .62em 1.2em; border-radius: 999px; background: var(--sand); color: var(--on-sand); font-weight: 600; opacity: 1 !important; }
 .search { display: flex; align-items: center; width: min(92vw, 34em); margin: .1em auto 0; height: 2.7em; padding: 0 .4em 0 1.1em; border-radius: .55em; background: #1a1c20; border: 1px solid var(--line); font-size: .86em; transition: border-color var(--t1) ease; }
 .search:focus-within { border-color: #55585f; }
@@ -300,7 +302,7 @@ body.lp { height: 100vh; height: 100dvh; display: flex; flex-direction: column; 
   .soonlist { grid-template-columns: repeat(2, 1fr); } .order, .faq, .contact { grid-template-columns: 1fr; gap: 2.2em; } .view { grid-template-columns: 1fr; }
   }
 @media (max-width: 760px) {
-  .menu, .side a:not(.pill) { display: none; } .bar .row { justify-content: space-between; font-size: .9em; } .search b { display: none; }
+  .menu, .side a:not(.pill):not(.signin) { display: none; } .side { gap: .6em; } .bar .row { justify-content: space-between; font-size: .9em; } .search b { display: none; }
   .hero { padding-top: 1.6em; } .track figure { width: 13em; }
   .wall { min-height: 17em; } .lead { flex-direction: column; text-align: center; gap: 1.4em; padding-top: 2em; } .btns { justify-content: center; }
   .sub { flex-direction: column; align-items: flex-start; } .ways, .ask .two { grid-template-columns: 1fr; } .ask { padding: 1.2em; } .ask .send { flex-direction: column; align-items: flex-start; } .work { grid-template-columns: 1fr; } .job, .job:nth-child(-n + 2) { grid-column: auto; } .job .cap { flex-direction: column; align-items: flex-start; gap: .4em; } .why, .buy, .soonlist { grid-template-columns: 1fr; gap: 1.6em; } .soonlist { gap: .8em; } .buy { gap: 1em; }

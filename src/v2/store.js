@@ -33,11 +33,12 @@ export const cart = {
   clear: () => write([]),
 }
 
-/** Cart and account links in the top bar, and a strip that says so when the store is only a test. */
+/** The cart link in the top bar, Sign in turning into Account once signed in, and a strip that says so when the store is only a test. */
 export function storeBar() {
   if (!storeOn) return
   const side = document.querySelector('.bar .side'); if (!side) return
-  side.insertAdjacentHTML('afterbegin', `<a href="/staging-v2/account/">Account</a><a class="cartlink" href="/staging-v2/cart/">Cart <b id="cartn"></b></a>`)
+  side.querySelector('.signin')?.insertAdjacentHTML('beforebegin', `<a class="cartlink" href="/staging-v2/cart/">Cart <b id="cartn"></b></a>`)
+  me().then(m => { const a = side.querySelector('.signin'); if (a && m.signed_in) a.textContent = 'Account' })
   const n = document.getElementById('cartn'), draw = () => { const c = cart.ids().length; n.textContent = c ? String(c) : ''; n.hidden = !c }
   draw(); addEventListener('gh-cart', draw); addEventListener('storage', draw)
   prices().then(p => { if (p.mode === 'test') document.body.insertAdjacentHTML('afterbegin', '<div class="teststrip">Test store. No real money is taken.</div>') }).catch(() => { })
@@ -45,5 +46,9 @@ export function storeBar() {
 
 /** For the three shop pages when the site was built without a store. */
 export function shut(main) {
+  if (document.body.dataset.page === 'account') {
+    main.innerHTML = `<div class="head"><h1>Sign in</h1><p>Accounts open with the store, soon. Bought something from us or working with the studio? <a class="link" href="mailto:glasshourproductions@gmail.com">Write to us</a> and we will sort it out.</p><p><a class="btn" href="/staging-v2/catalog/">Back to the shelf</a></p></div>`
+    return
+  }
   main.innerHTML = `<div class="head"><h1>Not open yet</h1><p>The store opens soon. Until then, <a class="link" href="mailto:glasshourproductions@gmail.com">write to us</a> and we will get you what you need.</p><p><a class="btn" href="/staging-v2/catalog/">Back to the shelf</a></p></div>`
 }
