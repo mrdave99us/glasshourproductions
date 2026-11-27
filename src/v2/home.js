@@ -28,6 +28,11 @@ if (items.length) {
   document.getElementById('lastbtns').innerHTML = '<a class="btn" href="/staging-v2/catalog/">Browse the catalog</a><a class="btn ghost" href="#contact">Start a project</a>'
 }
 
+// Arriving from another page with ?need= (the web apps page) presets "What you need" the same way.
+{
+  const want = new URLSearchParams(location.search).get('need'), sel = document.querySelector('#ask select[name="need"]')
+  if (want && sel && [...sel.options].some(o => o.value === want)) sel.value = want
+}
 // Links that lead to the form can say what the visitor is asking about; the form's "What you need" follows.
 document.addEventListener('click', e => {
   const a = e.target.closest('a[data-need][href="#contact"]')

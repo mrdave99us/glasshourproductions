@@ -311,3 +311,15 @@ body.lp { height: 100vh; height: 100dvh; display: flex; flex-direction: column; 
   .shelfgrid { grid-template-columns: repeat(2, 1fr); gap: .7em; } .item { padding: .5em .5em .7em; }
 }
 @media (prefers-reduced-motion: reduce) { .track { animation: none; } html { scroll-behavior: auto; } * { transition: none !important; } }
+
+/* Web apps page */
+.ap-hero { padding: 5.5em 0 3.5em; }
+.ap-kicker { display: block; color: var(--sand); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: .8em; margin-bottom: 1.2em; }
+.ap-hero h1 { margin: 0; font-size: clamp(2.6em, 6.4vw, 5.6em); line-height: .98; letter-spacing: -.035em; font-weight: 650; max-width: 12em; }
+.ap-hero h1 em { font-style: normal; color: var(--sand); }
+.ap-hero p { margin: 1.4em 0 2em; max-width: 36em; font-size: 1.15em; color: var(--soft); }
+.ap-hero .btns { justify-content: flex-start; }
+.ap-grid .card.word small { margin-bottom: 1.1em; }
+a.card.word u { display: inline-block; align-self: flex-start; margin-top: auto; padding-top: 1em; color: var(--sand); text-decoration: none; font-size: .86em; font-weight: 600; }
+.order li h3 a { color: inherit; }
+@media (max-width: 760px) { .ap-hero { padding: 2.6em 0 2em; } .ap-hero .btns { justify-content: flex-start; } .ap-grid { grid-template-columns: 1fr; } }
